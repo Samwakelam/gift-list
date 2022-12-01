@@ -1,0 +1,38 @@
+{
+  "name": "gift-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "turbo": "^1.6.3"
+  },
+  "workspaces": [
+    "app/*",
+    "packages/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samwakelam/gift-list.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Samwakelam/gift-list/issues"
+  },
+  "homepage": "https://github.com/Samwakelam/gift-list#readme",
+  "dependencies": {
+    "typescript": "^4.8.4"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "pnpm": ">=6.20.1"
+  },
+  "packageManager": "pnpm@7.2.0"
+}

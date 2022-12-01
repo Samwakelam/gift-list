@@ -1,0 +1,25 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev", 
+    "start": "next start", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^13.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@sam/library": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8"
+  }
+}
