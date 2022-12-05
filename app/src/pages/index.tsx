@@ -1,5 +1,21 @@
+import Link from 'next/link';
+
+import themeConfig from '@sam/library';
+
 const page = () => {
-  return <h6>Welcome next</h6>;
+    return (
+        <ul>
+            <li>
+                <Link href="/list-manager">List Manager</Link>
+            </li>
+            <li>
+                <Link href="/workshop-manager">Workshop Manager</Link>
+            </li>
+            <li>
+                <Link href="/list-builder">List Builder</Link>
+            </li>
+        </ul>
+    );
 };
 
 export default page;

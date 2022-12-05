@@ -10,6 +10,15 @@
     "lint": "eslint *.ts*",
     "cosmos:export": "cosmos-export"
   },
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": [
+      "./src/*.ts",
+      "./src/*.tsx",
+      "./src/*/index.ts",
+      "./src/*/*.ts"
+    ]
+  },
   "devDependencies": {
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
@@ -19,6 +28,7 @@
     "react": "^18.2.0",
     "react-cosmos": "^5.7.2",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3",
     "react-modal": "^3.16.1",
     "ts-loader": "^9.4.1",
     "ts-mockito": "^2.6.1",
@@ -32,7 +42,6 @@
     "@sam/theme": "workspace:*",
     "@sam/types": "workspace:*",
     "@twind/content": "^0.1.0",
-    "react-router-dom": "^6.4.3",
     "tailwind-colors": "^1.1.0",
     "tailwind-merge": "^1.8.0",
     "twind": "^0.16.17"

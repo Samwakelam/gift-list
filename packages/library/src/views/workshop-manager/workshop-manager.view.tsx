@@ -22,7 +22,7 @@ import {
 
 import * as S from './workshop-manager.styles';
 
-export const WorkshopsComponent =
+export const WorkshopManagerComponent =
   ({}: WorkshopManagerProps): ReactElement<WorkshopManagerProps> => {
     const { state, handlers } = useWorkshopManager();
 
@@ -68,10 +68,10 @@ export const WorkshopsComponent =
     );
   };
 
-export const Workshops = ({}) => {
+export const WorkshopManager = ({}) => {
   return (
     <WorkshopManagerProvider>
-      <WorkshopsComponent />
+      <WorkshopManagerComponent />
     </WorkshopManagerProvider>
   );
 };
