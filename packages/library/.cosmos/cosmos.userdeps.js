@@ -21,11 +21,12 @@ import fixture12 from './../__fixtures__/components/molecules/modals/sharing-mod
 import fixture13 from './../__fixtures__/components/molecules/no-results.fixture.tsx';
 import fixture14 from './../__fixtures__/components/molecules/top-bar.fixture.tsx';
 import fixture15 from './../__fixtures__/forms/atoms/input.fixture.tsx';
-import fixture16 from './../__fixtures__/forms/molecules/checkbox-group.fixture.tsx';
-import fixture17 from './../__fixtures__/forms/molecules/input-group.fixture.tsx';
-import fixture18 from './../__fixtures__/views/list-builder.fixture.tsx';
-import fixture19 from './../__fixtures__/views/list-manager.fixture.tsx';
-import fixture20 from './../__fixtures__/views/workshop-manager.fixture.tsx';
+import fixture16 from './../__fixtures__/forms/atoms/toggle.fixture.tsx';
+import fixture17 from './../__fixtures__/forms/molecules/checkbox-group.fixture.tsx';
+import fixture18 from './../__fixtures__/forms/molecules/input-group.fixture.tsx';
+import fixture19 from './../__fixtures__/views/list-builder.fixture.tsx';
+import fixture20 from './../__fixtures__/views/list-manager.fixture.tsx';
+import fixture21 from './../__fixtures__/views/workshop-manager.fixture.tsx';
 
 import decorator0 from './../__fixtures__/cosmos.decorator.tsx';
 
@@ -50,11 +51,12 @@ export const fixtures = {
   '__fixtures__/components/molecules/no-results.fixture.tsx': { module: { default: fixture13 } },
   '__fixtures__/components/molecules/top-bar.fixture.tsx': { module: { default: fixture14 } },
   '__fixtures__/forms/atoms/input.fixture.tsx': { module: { default: fixture15 } },
-  '__fixtures__/forms/molecules/checkbox-group.fixture.tsx': { module: { default: fixture16 } },
-  '__fixtures__/forms/molecules/input-group.fixture.tsx': { module: { default: fixture17 } },
-  '__fixtures__/views/list-builder.fixture.tsx': { module: { default: fixture18 } },
-  '__fixtures__/views/list-manager.fixture.tsx': { module: { default: fixture19 } },
-  '__fixtures__/views/workshop-manager.fixture.tsx': { module: { default: fixture20 } }
+  '__fixtures__/forms/atoms/toggle.fixture.tsx': { module: { default: fixture16 } },
+  '__fixtures__/forms/molecules/checkbox-group.fixture.tsx': { module: { default: fixture17 } },
+  '__fixtures__/forms/molecules/input-group.fixture.tsx': { module: { default: fixture18 } },
+  '__fixtures__/views/list-builder.fixture.tsx': { module: { default: fixture19 } },
+  '__fixtures__/views/list-manager.fixture.tsx': { module: { default: fixture20 } },
+  '__fixtures__/views/workshop-manager.fixture.tsx': { module: { default: fixture21 } }
 };
 
 export const decorators = {
