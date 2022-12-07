@@ -14,7 +14,7 @@ export const ListBuilderComponent = ({}: ListBuilderProps) => {
   const { state, handlers } = useListBuilder();
 
   return (
-    <div className={tw(S.ListBuilderCss)}>
+    <main className={tw(S.ListBuilderCss)}>
       <SlideMenu
         subTitle={'Gift List'}
         title={'List Builder'}
@@ -56,7 +56,7 @@ export const ListBuilderComponent = ({}: ListBuilderProps) => {
           </>
         )}
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { EntityModal, EntityModalType, Modal } from '../../../../src';
 import { mockListData } from '../../../../__synthetic__/list.data';
 

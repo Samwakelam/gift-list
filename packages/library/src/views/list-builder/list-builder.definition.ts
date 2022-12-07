@@ -5,5 +5,6 @@ export type ListBuilderProps = {};
 export type ListBuilderHandlers = {};
 
 export type ListBuilderState = {
-  list: List | null;
+    list: List | null;
+    isLoading: boolean;
 };

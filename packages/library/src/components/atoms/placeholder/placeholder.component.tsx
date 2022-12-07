@@ -6,7 +6,11 @@ import { PlaceholderProps } from './placeholder.definition';
 import * as S from './placeholder.styles';
 
 export const Placeholder = ({
-  children,
+    children,
 }: PlaceholderProps): ReactElement<PlaceholderProps> => {
-  return <div className={tw(S.PlaceholderCss)}>{children}</div>;
+    return (
+        <div className={tw(S.PlaceholderCss, S.PlaceholderStyles)}>
+            {children}
+        </div>
+    );
 };

@@ -27,7 +27,7 @@ export const WorkshopManagerComponent =
     const { state, handlers } = useWorkshopManager();
 
     return (
-      <div className={tw(S.WorkshopManagerCss)}>
+      <main className={tw(S.WorkshopManagerCss)}>
         <SlideMenu links={[]} title="Workshops" subTitle="Gift List">
           <>
             {state.owner && (
@@ -64,7 +64,7 @@ export const WorkshopManagerComponent =
             )}
           </div>
         </div>
-      </div>
+      </main>
     );
   };
 
