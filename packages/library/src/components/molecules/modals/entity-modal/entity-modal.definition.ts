@@ -1,6 +1,11 @@
-import { DispatchesType, Hook, List, Workshop } from '@sam/types';
+import { DispatchesType, Gift, Hook, List, Workshop } from '@sam/types';
+import React from 'react';
 
-import { InputGroupHandlers, InputGroupState } from '../../../../forms';
+import {
+  InputGroupHandlers,
+  InputGroupState,
+  ToggleProps,
+} from '../../../../forms';
 import { ButtonProps } from '../../../atoms';
 
 export enum EntityModalType {
@@ -10,18 +15,21 @@ export enum EntityModalType {
 
 export type EntityModalProps = {
   type: EntityModalType;
-  entity: List | Workshop | null;
+  entity: List | Workshop | Gift | Omit<Gift, 'id'> | null;
   dispatches: DispatchesType;
   onClose: () => void;
 };
 
 export type EntityModalState = {
-  entity: List | Workshop | null;
+  entity: List | Workshop | Gift | null;
   isProcessing: boolean;
   nameInput: Hook<InputGroupState, InputGroupHandlers>;
   descriptionInput: Hook<InputGroupState, InputGroupHandlers>;
+  'toggle-share': Omit<ToggleProps, 'onChange'>;
+  'toggle-visibility': Omit<ToggleProps, 'onChange'>;
 };
 
 export type EntityModalHandlers = {
   resolveButtonType: () => ButtonProps;
+  onToggle: (e: React.RefObject<HTMLSpanElement>) => void;
 };

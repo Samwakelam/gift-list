@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import { tw } from 'twind';
 
 import { Workshop } from '@sam/types';
@@ -8,7 +8,8 @@ import {
   EntityCard,
   NoResults,
   SlideMenu,
-  TopBar,
+  EntityBar,
+  Bar,
 } from '../../components';
 
 import { OwnerProfile } from './_partials/owner-profile';
@@ -26,9 +27,17 @@ export const WorkshopManagerComponent =
   ({}: WorkshopManagerProps): ReactElement<WorkshopManagerProps> => {
     const { state, handlers } = useWorkshopManager();
 
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
     return (
       <main className={tw(S.WorkshopManagerCss)}>
-        <SlideMenu links={[]} title="Workshops" subTitle="Gift List">
+        <SlideMenu
+          links={[]}
+          title="Workshops"
+          subTitle="Gift List"
+          isOpen={menuOpen}
+          onRequestClose={() => setMenuOpen(false)}
+        >
           <>
             {state.owner && (
               <OwnerProfile owner={state.owner} users={state.connections} />
@@ -37,9 +46,11 @@ export const WorkshopManagerComponent =
         </SlideMenu>
 
         <div className={tw(S.ContentContainerCss)}>
-          <TopBar entity={state.owner}>
-            <CreateWorkshopModal />
-          </TopBar>
+          <Bar menu={{ onClick: () => setMenuOpen(true), isFixed: true }}>
+            <EntityBar entity={state.owner}>
+              <CreateWorkshopModal />
+            </EntityBar>
+          </Bar>
           <div className={tw(S.ListContainerCss)}>
             {state.workshops.length > 0 ? (
               state.workshops.map((workshop: Workshop) => {

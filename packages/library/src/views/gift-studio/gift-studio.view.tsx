@@ -1,21 +1,32 @@
 import { tw } from 'twind';
-import { TopBar } from '../../components';
+import { Bar, EntityBar } from '../../components';
 
 import { GiftStudioProps } from './gift-studio.definition';
+import { GiftStudioProvider, useGiftStudio } from './gift-studio.view-model';
+import { WidgetDrawer } from './_partials/widget-drawer';
 
 import * as S from './gift-studio.styles';
 
 export const GiftStudioComponent = ({}: GiftStudioProps) => {
+  const { state, handlers } = useGiftStudio();
+
   return (
     <main className={tw(S.GiftBuilderCss)}>
-      <div className={tw(S.ContentContainerCss)}>
-        <TopBar entity={null} />
-        <div className={tw(S.ListContainerCss)}>hello</div>
-      </div>
+      <Bar menu={{ isFixed: false, onClick: () => {} }}>
+        <EntityBar entity={null} title="new Gift">
+          <WidgetDrawer />
+        </EntityBar>
+      </Bar>
+
+      <div className={tw(S.GiftContainerCss)}></div>
     </main>
   );
 };
 
 export const GiftStudio = () => {
-  return <GiftStudioComponent />;
+  return (
+    <GiftStudioProvider>
+      <GiftStudioComponent />
+    </GiftStudioProvider>
+  );
 };

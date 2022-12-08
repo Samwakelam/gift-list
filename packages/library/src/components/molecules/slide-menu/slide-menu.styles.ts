@@ -31,9 +31,10 @@ export const OpenTrigger = css({
     left: theme('spacing.20'),
     top: theme('spacing.8'),
   },
+
   '@screen sm': {
     left: theme('spacing.16'),
-    top: theme('spacing.16'),
+    top: theme('spacing.18'),
   },
 
   '@screen md': {

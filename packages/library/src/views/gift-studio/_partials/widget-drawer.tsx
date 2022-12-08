@@ -1,8 +1,7 @@
 import { useState } from 'react';
-
 import { Button, SlideOutDrawer } from '../../../components';
 
-export const NewGiftDrawer = () => {
+export const WidgetDrawer = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
 
   return (
@@ -11,10 +10,10 @@ export const NewGiftDrawer = () => {
         onClick={() => setIsDrawerOpen(true)}
         startIcon={{ icon: 'plus', ariaLabel: 'plus' }}
       >
-        New Gift
+        Add Widgets
       </Button>
       <SlideOutDrawer
-        drawerTitle="Gifts Drawer"
+        drawerTitle="Widget Drawer"
         isOpen={isDrawerOpen}
         onRequestClose={() => setIsDrawerOpen(false)}
       >

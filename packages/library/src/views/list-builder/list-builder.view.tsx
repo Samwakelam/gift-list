@@ -1,17 +1,26 @@
 import { tw } from 'twind';
 
-import { NoResults, Placeholder, SlideMenu, TopBar } from '../../components';
+import {
+  NoResults,
+  Placeholder,
+  SlideMenu,
+  EntityBar,
+  Bar,
+} from '../../components';
 import { MoreMenu } from '../../components/molecules/menus';
 
 import { ListBuilderProps } from './list-builder.definition';
 import { ListBuilderProvider, useListBuilder } from './list-builder.view-model';
 
-import { NewGiftDrawer } from './_partials/new-gift-drawer.component';
+import { GiftDrawer } from './_partials/gift-drawer.component';
 
 import * as S from './list-builder.styles';
+import { useState } from 'react';
 
 export const ListBuilderComponent = ({}: ListBuilderProps) => {
   const { state, handlers } = useListBuilder();
+
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   return (
     <main className={tw(S.ListBuilderCss)}>
@@ -23,21 +32,22 @@ export const ListBuilderComponent = ({}: ListBuilderProps) => {
           { label: 'List Manager', href: '/', isActive: false },
           { label: 'List Builder', href: '/', isActive: true },
         ]}
+        isOpen={menuOpen}
+        onRequestClose={() => setMenuOpen(false)}
       />
       <div className={tw(S.ContentContainerCss)}>
         {state.list && (
           <>
-            <TopBar
-              entity={state.list}
-              menu={
-                <MoreMenu
-                  entity={state.list}
-                  dispatches={{ onRemove: () => {} }}
-                />
-              }
-            >
-              <NewGiftDrawer />
-            </TopBar>
+            <Bar menu={{ onClick: () => setMenuOpen(true), isFixed: true }}>
+              <EntityBar
+                entity={state.list}
+                menu={{
+                  dispatches: { onRemove: () => {} },
+                }}
+              >
+                <GiftDrawer />
+              </EntityBar>
+            </Bar>
             <div className={tw(S.ListContainerCss)}>
               {state.list.gifts.length > 0 ? (
                 state.list.gifts.map((gift) => {
@@ -50,7 +60,7 @@ export const ListBuilderComponent = ({}: ListBuilderProps) => {
                 />
               )}
               <Placeholder>
-                <NewGiftDrawer />
+                <GiftDrawer />
               </Placeholder>
             </div>
           </>

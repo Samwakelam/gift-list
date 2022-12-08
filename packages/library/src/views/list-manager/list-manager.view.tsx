@@ -1,13 +1,14 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import { tw } from 'twind';
 
 import {
   EntityCard,
   NoResults,
   SlideMenu,
-  TopBar,
+  EntityBar,
   Card,
   MoreMenu,
+  Bar,
 } from '../../components';
 
 import { ListManagerProps } from './list-manager.definition';
@@ -21,6 +22,8 @@ export const ListManagerComponent =
   ({}: ListManagerProps): ReactElement<ListManagerProps> => {
     const { state, handlers } = useListManager();
 
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
     return (
       <main className={tw(S.ListManagerCss)}>
         <SlideMenu
@@ -30,24 +33,25 @@ export const ListManagerComponent =
             { label: 'Workshops', href: '/', isActive: false },
             { label: 'List Manager', href: '/', isActive: true },
           ]}
+          isOpen={menuOpen}
+          onRequestClose={() => setMenuOpen(false)}
         />
         <div className={tw(S.ContentContainerCss)}>
           {state.workshop && (
             <>
-              <TopBar
-                entity={state.workshop}
-                menu={
-                  <MoreMenu
-                    entity={state.workshop}
-                    dispatches={{
+              <Bar menu={{ onClick: () => setMenuOpen(true), isFixed: true }}>
+                <EntityBar
+                  entity={state.workshop}
+                  menu={{
+                    dispatches: {
                       onRemove: handlers.removeWorkshop,
                       onEdit: handlers.editWorkshop,
-                    }}
-                  />
-                }
-              >
-                <CreateListModal />
-              </TopBar>
+                    },
+                  }}
+                >
+                  <CreateListModal />
+                </EntityBar>
+              </Bar>
               <div className={tw(S.ListContainerCss)}>
                 {state.workshop.lists.length > 0 ? (
                   state.workshop.lists.map((list) => {
