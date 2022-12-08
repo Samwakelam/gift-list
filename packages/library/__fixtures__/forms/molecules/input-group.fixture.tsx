@@ -1,4 +1,5 @@
-import { InputGroup, ValidationType, Validators } from '../../../src';
+import React from 'react';
+import { InputGroup } from '../../../src';
 
 export default {
   ['Basic']: () => {
@@ -10,13 +11,19 @@ export default {
           labelText="Label"
           name="test"
           placeholder="Placeholder"
-          validators={[
-            [(value: string) => value.length > 0, 'This is a required field'],
-            [
-              Validators[ValidationType.GENERIC_STRING],
-              'Please enter a valid string',
-            ],
-          ]}
+          state={{
+            value: '',
+            error: {
+              hasError: false,
+              messages: [],
+            },
+            isValid: false,
+          }}
+          handlers={{
+            onChange: function (e: React.ChangeEvent<HTMLInputElement>): void {
+              throw new Error('Function not implemented.');
+            },
+          }}
         />
       </div>
     );
