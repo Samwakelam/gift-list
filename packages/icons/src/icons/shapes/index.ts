@@ -11,3 +11,4 @@ export * from './person-solid.icon';
 export * from './person.icon';
 export * from './star-solid.icon';
 export * from './star.icon';
+export * from './tag-solid.icon';

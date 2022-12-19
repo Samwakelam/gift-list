@@ -14,6 +14,7 @@ export const Button = ({
   icon,
   startIcon,
   endIcon,
+  disabled = false,
 }: ButtonProps) => {
   return (
     <button
@@ -22,6 +23,7 @@ export const Button = ({
         apply(resolveButtonVariant(buttonVariant), icon && S.IconButtonCss),
         className
       )}
+      disabled={disabled}
     >
       {startIcon && <Icon {...startIcon} />}
       {children && children}
@@ -40,6 +42,12 @@ const resolveButtonVariant = (
     }
     case ButtonVariant.TERTIARY: {
       return [S.buttonCss, S.TertiaryButtonCss];
+    }
+    case ButtonVariant.SUCCESS: {
+      return [S.buttonCss, S.SuccessButtonCss];
+    }
+    case ButtonVariant.PRODUCT: {
+      return [S.buttonCss, S.ProductButtonCss];
     }
     case ButtonVariant.NONE: {
       return S.UnstyledButtonCss;

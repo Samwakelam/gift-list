@@ -14,6 +14,7 @@ export const SlideMenu = ({
   links,
   children,
   isOpen,
+  isFixed = false,
   onRequestClose,
 }: SlideMenuProps) => {
   const modal = useRef(null);
@@ -28,8 +29,16 @@ export const SlideMenu = ({
     <aside id="slide-menu-parent" className={tw(S.SlideMenuParentCss)}>
       <ReactModal
         ref={modal}
-        className={tw(S.SlideMenuCss, isOpen && S.BeforeCloseCss)}
-        overlayClassName={tw(S.OverlayCss, S.OverlayStyles)}
+        className={tw(
+          S.SlideMenuCss,
+          isFixed && S.SlideMenuFixedCss,
+          isOpen && S.BeforeCloseCss
+        )}
+        overlayClassName={tw(
+          S.OverlayCss,
+          S.OverlayStyles,
+          isFixed && S.OverlayFixedCss
+        )}
         isOpen={true}
         shouldCloseOnEsc={true}
         shouldCloseOnOverlayClick={true}
@@ -43,7 +52,7 @@ export const SlideMenu = ({
           <p>{title}</p>
         </div>
         <Button
-          className={tw(S.CloseTrigger)}
+          className={tw(S.CloseTrigger, isFixed && S.CloseTriggerFixedCss)}
           icon={{ icon: 'cross', ariaLabel: 'close menu' }}
           onClick={() => onRequestClose()}
           buttonVariant={ButtonVariant.NONE}

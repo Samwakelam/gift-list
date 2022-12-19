@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const FlagIcon = (): JSX.Element => {
   return (
     <svg

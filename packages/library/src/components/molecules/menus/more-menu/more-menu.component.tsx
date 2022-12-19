@@ -1,8 +1,8 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useMemo, useState } from 'react';
 
 import { FillType } from '@sam/icons';
 
-import { ColourType, MenuDropdown, Modal } from '../../../atoms';
+import { MenuDropdown, MenuItemProps, Modal } from '../../../atoms';
 import {
   ConfirmModal,
   ConfirmModalType,
@@ -11,32 +11,48 @@ import {
 } from '../../modals';
 
 import { MoreMenuProps } from './more-menu.definition';
+import { ColourType, isGift, isList, isWorkshop } from '@sam/types';
 
 export const MoreMenu = ({
   entity,
   menuConfig,
   dispatches,
 }: MoreMenuProps): ReactElement<MoreMenuProps> => {
-  const [openModal, setOpenModal] = useState<string | null>(null);
+  const [openModal, setOpenModal] = useState<
+    'edit-list' | 'confirm-delete' | null
+  >(null);
+
+  const menuItems: MenuItemProps[] = useMemo(() => {
+    const items: MenuItemProps[] = [
+      {
+        text: 'edit',
+        icon: { icon: 'pencil', ariaLabel: 'edit', fill: FillType.OUTLINE },
+        onClick: () => setOpenModal('edit-list'),
+      },
+    ];
+
+    const canDelete: boolean =
+      isWorkshop(entity) || isList(entity) || isGift(entity);
+
+    if (canDelete) {
+      items.push({
+        text: 'delete',
+        colour: ColourType.ERROR,
+        icon: {
+          icon: 'bin',
+          ariaLabel: 'delete',
+          fill: FillType.OUTLINE,
+        },
+        onClick: () => setOpenModal('confirm-delete'),
+      });
+    }
+
+    return items;
+  }, [entity]);
 
   return (
     <>
-      <MenuDropdown
-        menuItems={[
-          {
-            text: 'edit',
-            icon: { icon: 'pencil', ariaLabel: 'edit', fill: FillType.OUTLINE },
-            onClick: () => setOpenModal('edit-list'),
-          },
-          {
-            text: 'delete',
-            colour: ColourType.ERROR,
-            icon: { icon: 'bin', ariaLabel: 'delete', fill: FillType.OUTLINE },
-            onClick: () => setOpenModal('confirm-delete'),
-          },
-        ]}
-        {...menuConfig}
-      />
+      <MenuDropdown menuItems={menuItems} {...menuConfig} />
       <Modal
         isOpen={openModal === 'edit-list'}
         onRequestClose={() => setOpenModal(null)}
@@ -49,20 +65,22 @@ export const MoreMenu = ({
           onClose={() => setOpenModal(null)}
         />
       </Modal>
-      <Modal
-        isOpen={openModal === 'confirm-delete'}
-        onRequestClose={() => setOpenModal(null)}
-        modalTitle="Edit List"
-      >
-        <ConfirmModal
-          type={ConfirmModalType.DELETE}
-          entity={entity}
-          title="Are you sure?"
-          description=""
-          onClose={() => setOpenModal(null)}
-          dispatches={dispatches}
-        />
-      </Modal>
+      {(isWorkshop(entity) || isList(entity) || isGift(entity)) && (
+        <Modal
+          isOpen={openModal === 'confirm-delete'}
+          onRequestClose={() => setOpenModal(null)}
+          modalTitle="Edit List"
+        >
+          <ConfirmModal
+            type={ConfirmModalType.DELETE}
+            entity={entity}
+            title="Are you sure?"
+            description=""
+            onClose={() => setOpenModal(null)}
+            dispatches={dispatches}
+          />
+        </Modal>
+      )}
     </>
   );
 };

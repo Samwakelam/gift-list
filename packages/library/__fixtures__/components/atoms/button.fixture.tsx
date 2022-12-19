@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelect } from 'react-cosmos/fixture';
 
 import { Button, ButtonVariant } from '../../../src';
@@ -15,12 +16,14 @@ export default {
   },
   ['Secondary']: () => {
     return (
-      <Button
-        onClick={() => alert('click')}
-        buttonVariant={ButtonVariant.SECONDARY}
-      >
-        Secondary Button
-      </Button>
+      <div style={{ backgroundColor: 'black', height: '100vh' }}>
+        <Button
+          onClick={() => alert('click')}
+          buttonVariant={ButtonVariant.SECONDARY}
+        >
+          Secondary Button
+        </Button>
+      </div>
     );
   },
   ['Tertiary']: () => {
@@ -30,6 +33,26 @@ export default {
         buttonVariant={ButtonVariant.TERTIARY}
       >
         Tertiary Button
+      </Button>
+    );
+  },
+  ['Success']: () => {
+    return (
+      <Button
+        onClick={() => alert('click')}
+        buttonVariant={ButtonVariant.SUCCESS}
+      >
+        Success Button
+      </Button>
+    );
+  },
+  ['Product']: () => {
+    return (
+      <Button
+        onClick={() => alert('click')}
+        buttonVariant={ButtonVariant.PRODUCT}
+      >
+        Product Button
       </Button>
     );
   },
@@ -51,6 +74,20 @@ export default {
         startIcon={{ icon: Icon, ariaLabel: 'plus' }}
       >
         Primary Button
+      </Button>
+    );
+  },
+  ['Disabled']: () => {
+    const [Icon] = useSelect('Icon', {
+      options: ['bin', 'clock', 'cross', 'pencil', 'plus'],
+    });
+    return (
+      <Button
+        onClick={() => alert('click')}
+        buttonVariant={ButtonVariant.PRIMARY}
+        disabled
+      >
+        Disabled Button
       </Button>
     );
   },

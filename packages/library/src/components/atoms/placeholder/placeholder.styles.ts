@@ -5,7 +5,6 @@ export const PlaceholderStyles = ``;
 export const PlaceholderCss = css({
   '&': {
     width: '100%',
-    height: theme('spacing.208'),
     backgroundColor: theme('colors.neutral.200'),
     borderRadius: theme('spacing.16'),
     borderStyle: 'dashed',

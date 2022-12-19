@@ -6,6 +6,7 @@ export type SlideMenuProps = {
   title: string;
   links: SlideMenuLinkProps[];
   isOpen: boolean;
+  isFixed?: boolean;
   onRequestClose: () => void;
   children?: ReactElement;
 };

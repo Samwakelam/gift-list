@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useRef } from 'react';
 import ReactModal from 'react-modal';
-import { tw } from 'twind';
+import { apply, tw } from 'twind';
 
 import { Button, ButtonVariant } from '../button';
 
@@ -13,6 +13,7 @@ export const SlideOutDrawer = ({
   onRequestClose,
   drawerTitle,
   children,
+  className,
 }: SlideOutDrawerProps): ReactElement<SlideOutDrawerProps> => {
   const drawer = useRef(null);
 
@@ -25,7 +26,7 @@ export const SlideOutDrawer = ({
   return (
     <ReactModal
       ref={drawer}
-      className={tw(S.DrawerCss)}
+      className={tw(apply(S.DrawerCss), className)}
       overlayClassName={{
         base: tw(S.OverlayCss),
         afterOpen: tw(S.OverlayAfterOpenCss),

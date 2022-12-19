@@ -10,15 +10,15 @@ export const ArrowUpLeftIcon = (): JSX.Element => {
       <path
         d="M16.8927 16.4818L5.10754 4.6967"
         stroke="black"
-        stroke-width="1.5"
-        stroke-miterlimit="10"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
       />
       <path
         d="M5.10751 12.9463L5.10751 4.69671L13.3571 4.69671"
         stroke="black"
-        stroke-width="1.5"
-        stroke-miterlimit="10"
-        stroke-linecap="square"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="square"
       />
     </svg>
   );

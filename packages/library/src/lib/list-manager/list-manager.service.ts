@@ -24,7 +24,7 @@ export class ListManagerService implements ListManagerContract {
   async deleteListById(id: string): Promise<void> {}
 }
 
-export function useListManagerService(workshopId: string) {
+export function useListManagerService(workshopId: string): ListManagerService {
   const manager = useRef(new ListManagerService(workshopId)).current;
   return manager;
 }

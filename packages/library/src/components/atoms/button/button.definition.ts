@@ -6,6 +6,8 @@ export enum ButtonVariant {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   TERTIARY = 'tertiary',
+  SUCCESS = 'success',
+  PRODUCT = 'product',
   NONE = 'none',
 }
 
@@ -17,4 +19,5 @@ export type ButtonProps = {
   startIcon?: IconProps;
   endIcon?: IconProps;
   icon?: IconProps;
+  disabled?: boolean;
 };

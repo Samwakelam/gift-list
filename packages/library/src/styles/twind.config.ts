@@ -31,6 +31,7 @@ export const themeConfig: Configuration = {
       112: '7rem',
       144: '9rem',
       208: '13rem',
+      304: '19rem',
       544: '34rem',
     },
     extend: {

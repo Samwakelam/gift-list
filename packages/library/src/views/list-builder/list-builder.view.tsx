@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { tw } from 'twind';
 
 import {
@@ -7,7 +8,6 @@ import {
   EntityBar,
   Bar,
 } from '../../components';
-import { MoreMenu } from '../../components/molecules/menus';
 
 import { ListBuilderProps } from './list-builder.definition';
 import { ListBuilderProvider, useListBuilder } from './list-builder.view-model';
@@ -15,7 +15,6 @@ import { ListBuilderProvider, useListBuilder } from './list-builder.view-model';
 import { GiftDrawer } from './_partials/gift-drawer.component';
 
 import * as S from './list-builder.styles';
-import { useState } from 'react';
 
 export const ListBuilderComponent = ({}: ListBuilderProps) => {
   const { state, handlers } = useListBuilder();
@@ -34,6 +33,7 @@ export const ListBuilderComponent = ({}: ListBuilderProps) => {
         ]}
         isOpen={menuOpen}
         onRequestClose={() => setMenuOpen(false)}
+        isFixed
       />
       <div className={tw(S.ContentContainerCss)}>
         {state.list && (
@@ -59,7 +59,7 @@ export const ListBuilderComponent = ({}: ListBuilderProps) => {
                   description="Add some gift ideas to get started"
                 />
               )}
-              <Placeholder>
+              <Placeholder className={tw(S.PlaceholderCss)}>
                 <GiftDrawer />
               </Placeholder>
             </div>

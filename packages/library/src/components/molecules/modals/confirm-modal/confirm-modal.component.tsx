@@ -26,8 +26,8 @@ export const ConfirmModal = ({
       <h3>{title ? title : 'Are you sure?'}</h3>
       <p>{description}</p>
       <div className={tw(S.ButtonBoxCss)}>
-        <Button {...handlers.resolveConfirmButton()} />
-        <Button {...handlers.resolveDeclineButton()} />
+        <Button {...handlers.resolveConfirmButton()} disabled={isProcessing} />
+        <Button {...handlers.resolveDeclineButton()} disabled={isProcessing} />
       </div>
     </div>
   );

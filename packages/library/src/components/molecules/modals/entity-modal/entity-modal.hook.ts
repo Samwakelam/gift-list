@@ -5,156 +5,156 @@ import { Entity, Hook } from '@sam/types';
 import { useInputGroup } from '../../../../forms';
 
 import {
-    EntityModalHandlers,
-    EntityModalProps,
-    EntityModalState,
-    EntityModalType,
+  EntityModalHandlers,
+  EntityModalProps,
+  EntityModalState,
+  EntityModalType,
 } from './entity-modal.definition';
 import {
-    EntityNameValidators,
-    EntityDescriptionValidators,
+  EntityNameValidators,
+  EntityDescriptionValidators,
 } from './entity-modal.utils';
 
 export const useEntityModal = (
-    type: EntityModalProps['type'],
-    entity: EntityModalProps['entity'],
-    dispatches: EntityModalProps['dispatches'],
-    onClose: EntityModalProps['onClose']
+  type: EntityModalProps['type'],
+  entity: EntityModalProps['entity'],
+  dispatches: EntityModalProps['dispatches'],
+  onClose: EntityModalProps['onClose']
 ): Hook<EntityModalState, EntityModalHandlers> => {
-    const { onAdd, onEdit } = dispatches;
+  const { onAdd, onEdit } = dispatches;
 
-    const [state, setState] = useState<
-        Omit<EntityModalState, 'nameInput' | 'descriptionInput'>
-    >({
-        entity,
-        isProcessing: false,
-        'toggle-share': {
-            name: 'toggle-share',
-            active: false,
-        },
-        'toggle-visibility': {
-            name: 'toggle-visibility',
-            active: false,
-        },
-    });
+  const [state, setState] = useState<
+    Omit<EntityModalState, 'nameInput' | 'descriptionInput'>
+  >({
+    entity,
+    isProcessing: false,
+    'toggle-share': {
+      name: 'toggle-share',
+      active: false,
+    },
+    'toggle-visibility': {
+      name: 'toggle-visibility',
+      active: false,
+    },
+  });
 
-    const nameInput = useInputGroup(
-        entity ? entity.name : '',
-        EntityNameValidators
-    );
+  const nameInput = useInputGroup(
+    entity ? entity.name : '',
+    EntityNameValidators
+  );
 
-    const descriptionInput = useInputGroup(
-        entity && entity.description !== null ? entity.description : '',
-        EntityDescriptionValidators
-    );
+  const descriptionInput = useInputGroup(
+    entity && entity.description !== null ? entity.description : '',
+    EntityDescriptionValidators
+  );
 
-    const isSuccess = (result: boolean): void => {
-        setState((prev) => ({ ...prev, isProcessing: false }));
-        onClose();
+  const isSuccess = (result: boolean): void => {
+    setState((prev) => ({ ...prev, isProcessing: false }));
+    onClose();
+  };
+
+  const addEntity = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    setState((prev) => ({ ...prev, isProcessing: true }));
+
+    if (nameInput.state.value === '') {
+      setState((prev) => ({ ...prev, isProcessing: false }));
+      return;
+    }
+
+    let description: string | null = descriptionInput.state.value;
+    if (description === '') {
+      description = null;
+    }
+
+    const name = nameInput.state.value;
+
+    const entity: Omit<Entity, 'id'> = {
+      name,
+      lookupKey: '',
+      createdAt: new Date(),
+      description,
+      visibility: {
+        isVisible: state['toggle-visibility'].active,
+        sharedWith: [],
+      },
     };
 
-    const addEntity = (e: React.MouseEvent<HTMLButtonElement>): void => {
-        e.preventDefault();
-        e.stopPropagation();
+    onAdd({ entity, allShare: state['toggle-share'].active }, isSuccess);
+  };
 
-        if (nameInput.state.value === '') {
-            return;
-        }
+  const editEntity = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    setState((prev) => ({ ...prev, isProcessing: true }));
 
-        let description: string | null = descriptionInput.state.value;
-        if (description === '') {
-            description = null;
-        }
+    if (nameInput.state.value === '') {
+      return;
+    }
 
-        const name = nameInput.state.value;
+    let description: string | null = descriptionInput.state.value;
+    if (description === '') {
+      description = null;
+    }
 
-        const entity: Omit<Entity, 'id'> = {
-            name,
-            lookupKey: '',
-            createdAt: new Date(),
-            description,
-            visibility: {
-                isVisible: state['toggle-visibility'].active,
-                sharedWith: [],
-            },
-        };
+    const name = nameInput.state.value;
 
-        onAdd({ entity, allShare: state['toggle-share'].active }, isSuccess);
+    const editedEntity = {
+      ...state.entity,
+      name,
+      description,
     };
 
-    const editEntity = (e: React.MouseEvent<HTMLButtonElement>): void => {
-        setState((prev) => ({ ...prev, isProcessing: true }));
+    onEdit(editedEntity, isSuccess);
+  };
 
-        if (nameInput.state.value === '') {
-            return;
-        }
+  const onToggle: EntityModalHandlers['onToggle'] = (e) => {
+    const dataset = e.current?.dataset;
 
-        let description: string | null = descriptionInput.state.value;
-        if (description === '') {
-            description = null;
-        }
+    if (
+      dataset &&
+      dataset.name === state['toggle-share'].name &&
+      dataset.active
+    ) {
+      const active = dataset.active ? JSON.parse(dataset.active) : false;
+      setState((prev) => ({
+        ...prev,
+        'toggle-share': { name: dataset.name!, active },
+      }));
+    }
 
-        const name = nameInput.state.value;
+    if (
+      dataset &&
+      dataset.name === state['toggle-visibility'].name &&
+      dataset.active
+    ) {
+      const active = dataset.active ? JSON.parse(dataset.active) : false;
+      setState((prev) => ({
+        ...prev,
+        'toggle-visibility': { name: dataset.name!, active },
+      }));
+    }
+  };
 
-        const editedEntity = {
-            ...state.entity,
-            name,
-            description,
-        };
+  const resolveButtonType: EntityModalHandlers['resolveButtonType'] = () => {
+    if (type === EntityModalType.CREATE) {
+      return {
+        children: 'Create',
+        onClick: (e: React.MouseEvent<HTMLButtonElement>) => addEntity(e),
+      };
+    }
 
-        onEdit(editedEntity, isSuccess);
-    };
+    if (type === EntityModalType.EDIT) {
+      return {
+        children: 'Update',
+        onClick: (e: React.MouseEvent<HTMLButtonElement>) => editEntity(e),
+      };
+    }
 
-    const onToggle: EntityModalHandlers['onToggle'] = (e) => {
-        const dataset = e.current?.dataset;
+    return {};
+  };
 
-        if (
-            dataset &&
-            dataset.name === state['toggle-share'].name &&
-            dataset.active
-        ) {
-            const active = dataset.active ? JSON.parse(dataset.active) : false;
-            setState((prev) => ({
-                ...prev,
-                'toggle-share': { name: dataset.name!, active },
-            }));
-        }
-
-        if (
-            dataset &&
-            dataset.name === state['toggle-visibility'].name &&
-            dataset.active
-        ) {
-            const active = dataset.active ? JSON.parse(dataset.active) : false;
-            setState((prev) => ({
-                ...prev,
-                'toggle-visibility': { name: dataset.name!, active },
-            }));
-        }
-    };
-
-    const resolveButtonType: EntityModalHandlers['resolveButtonType'] = () => {
-        if (type === EntityModalType.CREATE) {
-            return {
-                children: 'Create',
-                onClick: (e: React.MouseEvent<HTMLButtonElement>) =>
-                    addEntity(e),
-            };
-        }
-
-        if (type === EntityModalType.EDIT) {
-            return {
-                children: 'Update',
-                onClick: (e: React.MouseEvent<HTMLButtonElement>) =>
-                    editEntity(e),
-            };
-        }
-
-        return {};
-    };
-
-    return {
-        state: { ...state, nameInput, descriptionInput },
-        handlers: { resolveButtonType, onToggle },
-    };
+  return {
+    state: { ...state, nameInput, descriptionInput },
+    handlers: { resolveButtonType, onToggle },
+  };
 };

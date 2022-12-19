@@ -2,6 +2,8 @@ export * from './camera-solid.icon';
 export * from './camera.icon';
 export * from './flag-solid.icon';
 export * from './flag.icon';
+export * from './image-solid.icon';
+export * from './image.icon';
 export * from './order-solid.icon';
 export * from './order.icon';
 export * from './thumb-down-solid.icon';

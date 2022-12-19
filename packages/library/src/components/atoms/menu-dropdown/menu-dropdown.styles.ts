@@ -1,6 +1,6 @@
 import { css, Theme, theme } from 'twind/css';
 
-import { ColourType } from './menu-dropdown.definition';
+import { ColourType } from '@sam/types';
 
 export const MenuDropdownCss = css({
   position: 'relative',

@@ -13,7 +13,7 @@ export const AddConnectionModal = ({
   onClose,
 }: AddConnectionModalProps): ReactElement<AddConnectionModalProps> => {
   const {
-    state: { addConnectionInput },
+    state: { addConnectionInput, isProcessing },
     handlers: { onSubmit },
   } = useAddConnectionModal(onClose);
 
@@ -26,7 +26,9 @@ export const AddConnectionModal = ({
         showLabel
         {...addConnectionInput}
       />
-      <Button onClick={(e) => onSubmit(e)}>Submit</Button>
+      <Button onClick={(e) => onSubmit(e)} disabled={isProcessing}>
+        Submit
+      </Button>
     </div>
   );
 };

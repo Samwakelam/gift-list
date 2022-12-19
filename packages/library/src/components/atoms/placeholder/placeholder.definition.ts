@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
 export type PlaceholderProps = {
-  children?: ReactElement;
+  children?: ReactElement | ReactElement[];
   className?: string;
 };

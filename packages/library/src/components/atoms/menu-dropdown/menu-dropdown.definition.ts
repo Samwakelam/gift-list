@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 
 import { IconProps } from '@sam/icons';
+import { ColourType } from '@sam/types';
 
 export enum MenuDropdownType {
   MAIN = 'main',
@@ -10,11 +11,6 @@ export enum MenuDropdownType {
 export enum Alignment {
   RIGHT = 'right',
   LEFT = 'left',
-}
-
-export enum ColourType {
-  GREY = 'colors.neutral.700',
-  ERROR = 'colors.red.600',
 }
 
 export type MenuItemProps = {

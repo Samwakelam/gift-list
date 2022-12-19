@@ -31,6 +31,7 @@ export const buttonCss: Directive<CSSRules> = css({
     alignItems: 'center',
     gap: theme('spacing.8'),
   },
+
   '&:hover': {
     backgroundColor: theme('colors.neutral.700'),
   },
@@ -39,6 +40,10 @@ export const buttonCss: Directive<CSSRules> = css({
     outlineColor: theme('colors.pink.500'),
     outlineOffset: theme('spacing.2'),
   },
+  '&:disabled': {
+    backgroundColor: theme('colors.neutral.300'),
+  },
+
   '& i': {
     textAlign: 'center',
   },
@@ -65,14 +70,40 @@ export const SecondaryButtonCss: Directive<CSSRules> = css({
 
 export const TertiaryButtonCss: Directive<CSSRules> = css({
   '&': {
-    backgroundColor: theme('colors.neutral.300'),
+    backgroundColor: theme('colors.neutral.400'),
     color: theme('colors.neutral.900'),
   },
   '&:hover': {
-    backgroundColor: theme('colors.neutral.400'),
+    backgroundColor: theme('colors.neutral.500'),
   },
   '& path': {
     fill: theme('colors.neutral.900'),
+  },
+});
+
+export const SuccessButtonCss: Directive<CSSRules> = css({
+  '&': {
+    backgroundColor: theme('colors.green.600'),
+    color: theme('colors.neutral.50'),
+  },
+  '&:hover': {
+    backgroundColor: theme('colors.green.700'),
+  },
+  '& path': {
+    fill: theme('colors.neutral.50'),
+  },
+});
+
+export const ProductButtonCss: Directive<CSSRules> = css({
+  '&': {
+    backgroundColor: theme('colors.sky.600'),
+    color: theme('colors.neutral.50'),
+  },
+  '&:hover': {
+    backgroundColor: theme('colors.sky.700'),
+  },
+  '& path': {
+    fill: theme('colors.neutral.50'),
   },
 });
 
@@ -82,6 +113,7 @@ export const IconButtonCss: Directive<CSSRules> = css({
     paddingRight: theme('spacing.12'),
     height: theme('spacing.44'),
     width: theme('spacing.44'),
+    justifyContent: 'center',
 
     i: {
       display: 'flex',

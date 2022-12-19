@@ -35,6 +35,7 @@ export const ListManagerComponent =
           ]}
           isOpen={menuOpen}
           onRequestClose={() => setMenuOpen(false)}
+          isFixed
         />
         <div className={tw(S.ContentContainerCss)}>
           {state.workshop && (

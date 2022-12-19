@@ -41,7 +41,9 @@ export const SharingModal = ({
           );
         })}
       </ul>
-      <Button onClick={(e) => onSubmit(e)}>Update</Button>
+      <Button onClick={(e) => onSubmit(e)} disabled={state.isProcessing}>
+        Update
+      </Button>
     </div>
   );
 };

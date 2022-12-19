@@ -25,29 +25,15 @@ export const SlideMenuParentCss = css({
   },
 });
 
-export const OpenTrigger = css({
-  '&': {
-    position: 'absolute',
-    left: theme('spacing.20'),
-    top: theme('spacing.8'),
-  },
-
-  '@screen sm': {
-    left: theme('spacing.16'),
-    top: theme('spacing.18'),
-  },
-
-  '@screen md': {
-    display: 'none',
-  },
-});
-
 export const CloseTrigger = css({
   '&': {
     position: 'absolute',
     right: theme('spacing.16'),
     top: theme('spacing.16'),
   },
+});
+
+export const CloseTriggerFixedCss = css({
   '@screen md': {
     display: 'none',
   },
@@ -78,6 +64,9 @@ export const SlideMenuCss = css({
   '@media (min-width: 500px)': {
     width: '320px',
   },
+});
+
+export const SlideMenuFixedCss = css({
   '@screen md': {
     borderTopRightRadius: 'unset',
     borderBottomRightRadius: 'unset',
@@ -107,6 +96,9 @@ export const OverlayCss = css({
     pointerEvents: 'none',
     zIndex: 1,
   },
+});
+
+export const OverlayFixedCss = css({
   '@screen md': {
     display: 'block',
     position: 'relative',
