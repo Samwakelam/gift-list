@@ -11,11 +11,11 @@ import * as S from './entity-bar.styles';
 export const EntityBar = ({
   entity,
   children,
+  fullWidth = false,
   menu,
-  title,
 }: EntityBarProps) => {
   return (
-    <div className={tw(S.EntityBarCss)}>
+    <div className={tw(S.EntityBarCss, fullWidth && S.FWEntityBarCss)}>
       <div className={tw(S.TitlesCss)}>
         {isOwner(entity) && <h6>Welcome</h6>}
         {!isOwner(entity) && entity && entity.description && (
@@ -27,10 +27,12 @@ export const EntityBar = ({
               <MoreMenu entity={entity} dispatches={menu.dispatches} />
             )}
           </div>
-          <h1>{entity ? entity.name : title ? title : 'Undefined'}</h1>
+          <h1>{entity.name}</h1>
         </div>
       </div>
-      <div className={tw(S.ContentCss)}>{children}</div>
+      <div className={tw(S.ContentCss, fullWidth && S.FWContentCss)}>
+        {children}
+      </div>
     </div>
   );
 };

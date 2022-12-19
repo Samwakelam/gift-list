@@ -1,3 +1,4 @@
+import React from 'react';
 import { Placeholder } from '../../../src/components/atoms/placeholder';
 
 const PlaceholderFixture = () => {

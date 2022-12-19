@@ -25,9 +25,20 @@ export const EntityBarCss: Directive<CSSRules> = css({
   },
 });
 
+export const FWEntityBarCss = css({
+  '@screen md': {
+    flexFlow: 'row',
+    alignItems: 'center',
+
+    '& > div': {
+      marginBottom: 0,
+    },
+  },
+});
+
 export const TitlesCss: Directive<CSSRules> = css({
   '&': {
-    flex: 0,
+    flex: '0 1 auto',
     marginBottom: theme('spacing.16'),
     width: '100%',
   },
@@ -71,10 +82,11 @@ export const MenuBoxCss: Directive<CSSRules> = css({
 
 export const ContentCss: Directive<CSSRules> = css({
   '&': {
-    flex: 1,
+    flex: '0 0 auto',
     display: 'flex',
     flexFlow: 'column',
     alignItems: 'stretch',
+    gap: theme('spacing.16'),
   },
 
   '@screen sm': {
@@ -84,6 +96,21 @@ export const ContentCss: Directive<CSSRules> = css({
 
   '@screen md': {
     flexFlow: 'column',
+  },
+
+  '@screen lg': {
+    flexFlow: 'row',
+  },
+});
+
+export const FWContentCss: Directive<CSSRules> = css({
+  '@screen sm': {
+    flexFlow: 'column',
+    justifyContent: 'flex-end',
+  },
+
+  '@screen md': {
+    flexFlow: 'row',
   },
 
   '@screen lg': {

@@ -32,6 +32,7 @@ export const useConfirmModal = (
   const deleteEntity = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     e.stopPropagation();
+
     setState((prev) => ({ ...prev, isProcessing: true }));
     onRemove(item.id, isSuccess);
   };

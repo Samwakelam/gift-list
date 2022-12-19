@@ -12,6 +12,7 @@ import {
   PersonSolidIcon,
   StarIcon,
   StarSolidIcon,
+  TagSolidIcon,
 } from '../icons';
 
 export type ShapesType =
@@ -21,7 +22,8 @@ export type ShapesType =
   | 'heart'
   | 'house'
   | 'person'
-  | 'star';
+  | 'star'
+  | 'tag';
 
 export const shapesMap: { [key in ShapesType]: () => JSX.Element } = {
   cart: CartIcon,
@@ -31,6 +33,7 @@ export const shapesMap: { [key in ShapesType]: () => JSX.Element } = {
   house: HouseIcon,
   person: PersonIcon,
   star: StarIcon,
+  tag: TagSolidIcon,
 };
 
 export const shapesSolidMap: { [key in ShapesType]: () => JSX.Element } = {
@@ -41,4 +44,5 @@ export const shapesSolidMap: { [key in ShapesType]: () => JSX.Element } = {
   house: HouseSolidIcon,
   person: PersonSolidIcon,
   star: StarSolidIcon,
+  tag: TagSolidIcon,
 };

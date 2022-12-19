@@ -12,6 +12,8 @@ export const DrawerCss = css({
     borderBottomLeftRadius: theme('spacing.16'),
     position: 'absolute',
     right: 0,
+    display: 'flex',
+    flexFlow: 'column',
   },
   '@screen md': {
     width: '50%',
@@ -78,6 +80,23 @@ export const ContentCss = css({
   '&': {
     paddingTop: theme('spacing.16'),
     paddingBottom: theme('spacing.24'),
+    paddingLeft: theme('spacing.16'),
+    paddingRight: theme('spacing.16'),
+    height: '100%',
+    overflowY: 'auto',
+  },
+
+  '@screen sm': {
+    paddingLeft: theme('spacing.24'),
+    paddingRight: theme('spacing.24'),
+  },
+
+  '@screen md': {
+    paddingLeft: theme('spacing.32'),
+    paddingRight: theme('spacing.32'),
+  },
+
+  '@screen lg': {
     paddingLeft: theme('spacing.56'),
     paddingRight: theme('spacing.56'),
   },

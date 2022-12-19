@@ -27,17 +27,28 @@ export const useAddConnectionModal = (
 
   const [state, setState] = useState<
     Omit<AddConnectionModalState, 'addConnectionInput'>
-  >({});
+  >({
+    isProcessing: false,
+  });
 
   const addConnectionInput = useInputGroup('', validators);
 
   const isSuccess = (result: boolean): void => {
+    setState((prev) => ({
+      ...prev,
+      isProcessing: false,
+    }));
+
     onClose();
   };
 
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     e.stopPropagation();
+    setState((prev) => ({
+      ...prev,
+      isProcessing: true,
+    }));
 
     const {
       state: {

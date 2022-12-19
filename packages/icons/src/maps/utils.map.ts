@@ -1,6 +1,8 @@
 import {
   BinIcon,
   BinSolidIcon,
+  BlogIcon,
+  BlogSolidIcon,
   CommentIcon,
   CommentSolidIcon,
   CopyIcon,
@@ -19,6 +21,7 @@ import {
 
 export type UtilsType =
   | 'bin'
+  | 'blog'
   | 'comment'
   | 'copy'
   | 'download'
@@ -30,6 +33,7 @@ export type UtilsType =
 
 export const utilsMap: { [key in UtilsType]: () => JSX.Element } = {
   bin: BinIcon,
+  blog: BlogIcon,
   comment: CommentIcon,
   copy: CopyIcon,
   download: DownloadIcon,
@@ -42,6 +46,7 @@ export const utilsMap: { [key in UtilsType]: () => JSX.Element } = {
 
 export const utilsSolidMap: { [key in UtilsType]: () => JSX.Element } = {
   bin: BinSolidIcon,
+  blog: BlogSolidIcon,
   comment: CommentSolidIcon,
   copy: CopySolidIcon,
   download: DownloadIcon,

@@ -18,6 +18,7 @@ export const useSharingModal = (
 
   const [state, setState] = useState<SharingModalState>({
     checked: [],
+    isProcessing: false,
   });
 
   const isSuccess = (result: boolean) => {
@@ -57,6 +58,8 @@ export const useSharingModal = (
   const onSubmit: SharingModalHandlers['onSubmit'] = (e) => {
     e.stopPropagation();
     e.preventDefault();
+    setState((prev) => ({ ...prev, isProcessing: true }));
+
     onEdit(state.checked, isSuccess);
   };
 

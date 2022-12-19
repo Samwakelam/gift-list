@@ -37,6 +37,7 @@ export const WorkshopManagerComponent =
           subTitle="Gift List"
           isOpen={menuOpen}
           onRequestClose={() => setMenuOpen(false)}
+          isFixed
         >
           <>
             {state.owner && (
@@ -46,11 +47,13 @@ export const WorkshopManagerComponent =
         </SlideMenu>
 
         <div className={tw(S.ContentContainerCss)}>
-          <Bar menu={{ onClick: () => setMenuOpen(true), isFixed: true }}>
-            <EntityBar entity={state.owner}>
-              <CreateWorkshopModal />
-            </EntityBar>
-          </Bar>
+          {state.owner && (
+            <Bar menu={{ onClick: () => setMenuOpen(true), isFixed: true }}>
+              <EntityBar entity={state.owner}>
+                <CreateWorkshopModal />
+              </EntityBar>
+            </Bar>
+          )}
           <div className={tw(S.ListContainerCss)}>
             {state.workshops.length > 0 ? (
               state.workshops.map((workshop: Workshop) => {

@@ -1,5 +1,7 @@
 export * from './bin-solid.icon';
 export * from './bin.icon';
+export * from './blog-solid.icon';
+export * from './blog.icon';
 export * from './comment-solid.icon';
 export * from './comment.icon';
 export * from './copy-solid.icon';

@@ -1,18 +1,16 @@
-import { DispatchesType, Gift, List, Owner, Workshop } from '@sam/types';
-import { ButtonProps } from '../../../atoms';
+import { Gift, List, Owner, Workshop } from '@sam/types';
+import { ButtonProps, ModalChildProps } from '../../../atoms';
 
 export enum ConfirmModalType {
   DELETE = 'delete',
 }
 
-export type ConfirmModalProps = {
+export interface ConfirmModalProps extends ModalChildProps {
   type: ConfirmModalType;
-  entity: List | Workshop | Owner | Gift | Omit<Gift, 'id'>;
+  entity: List | Workshop | Owner | Gift;
   title?: string;
   description?: string;
-  dispatches: DispatchesType;
-  onClose: () => void;
-};
+}
 
 export type ConfirmModalState = {
   isProcessing: boolean;

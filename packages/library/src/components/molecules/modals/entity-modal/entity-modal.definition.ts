@@ -1,4 +1,4 @@
-import { DispatchesType, Gift, Hook, List, Workshop } from '@sam/types';
+import { Gift, Hook, List, Workshop } from '@sam/types';
 import React from 'react';
 
 import {
@@ -6,22 +6,20 @@ import {
   InputGroupState,
   ToggleProps,
 } from '../../../../forms';
-import { ButtonProps } from '../../../atoms';
+import { ButtonProps, ModalChildProps } from '../../../atoms';
 
 export enum EntityModalType {
   CREATE = 'create',
   EDIT = 'edit',
 }
 
-export type EntityModalProps = {
+export interface EntityModalProps extends ModalChildProps {
   type: EntityModalType;
   entity: List | Workshop | Gift | Omit<Gift, 'id'> | null;
-  dispatches: DispatchesType;
-  onClose: () => void;
-};
+}
 
 export type EntityModalState = {
-  entity: List | Workshop | Gift | null;
+  entity: List | Workshop | Gift | Omit<Gift, 'id'> | null;
   isProcessing: boolean;
   nameInput: Hook<InputGroupState, InputGroupHandlers>;
   descriptionInput: Hook<InputGroupState, InputGroupHandlers>;
