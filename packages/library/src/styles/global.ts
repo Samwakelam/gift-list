@@ -1,8 +1,9 @@
 import { theme } from 'twind';
+import { css } from 'twind/css';
 
 import tokens from './tokens';
 
-export default {
+export const globalStyles = css({
   ':global': {
     '*': {
       boxSizing: 'border-box',
@@ -100,4 +101,4 @@ export default {
       fontFamily: theme('fontFamily.roboto'),
     },
   },
-};
+});
