@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelect } from 'react-cosmos/fixture';
 
-import { EntityBar } from '../../../src';
+import { Bar, EntityBar } from '../../../src';
 
 import { mockListData } from '../../../__synthetic__/list.data';
 import { mockWorkshopData } from '../../../__synthetic__/workshop.data';
@@ -28,5 +28,9 @@ export default () => {
     },
   };
 
-  return <EntityBar entity={entity[entityType]} />;
+  return (
+    <Bar>
+      <EntityBar entity={entity[entityType]} />
+    </Bar>
+  );
 };

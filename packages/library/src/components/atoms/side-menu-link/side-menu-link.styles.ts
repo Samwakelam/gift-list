@@ -13,6 +13,7 @@ export const SlideMenuLinkCss: Directive<CSSRules> = css({
     textTransform: 'uppercase',
     fontWeight: '700',
     margin: `${tokens.spacing[16]} 0`,
+    borderRadius: theme('spacing.4'),
   },
 });
 

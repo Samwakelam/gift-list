@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, NoResults } from '../../../src';
 
 export default {
