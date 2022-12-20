@@ -52,8 +52,10 @@ export const useGiftStudio = () => {
 };
 
 export const GiftStudioProvider = ({
+  userId,
   children,
 }: {
+  userId: string;
   children: ReactElement;
 }) => {
   const [state, setState] = useState<GiftStudioState>({

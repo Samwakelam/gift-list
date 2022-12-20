@@ -32,7 +32,7 @@ export const WorkshopManagerComponent =
     return (
       <main className={tw(S.WorkshopManagerCss)}>
         <SlideMenu
-          links={[]}
+          links={[{ label: 'Workshops', href: '/', isActive: true }]}
           title="Workshops"
           subTitle="Gift List"
           isOpen={menuOpen}
@@ -82,9 +82,9 @@ export const WorkshopManagerComponent =
     );
   };
 
-export const WorkshopManager = ({}) => {
+export const WorkshopManager = ({ userId }: { userId: string }) => {
   return (
-    <WorkshopManagerProvider>
+    <WorkshopManagerProvider userId={userId}>
       <WorkshopManagerComponent />
     </WorkshopManagerProvider>
   );

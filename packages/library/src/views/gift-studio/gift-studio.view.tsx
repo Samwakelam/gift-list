@@ -88,9 +88,9 @@ export const GiftStudioComponent = ({}: GiftStudioProps) => {
   );
 };
 
-export const GiftStudio = () => {
+export const GiftStudio = ({ userId }: { userId: string }) => {
   return (
-    <GiftStudioProvider>
+    <GiftStudioProvider userId={userId}>
       <GiftStudioComponent />
     </GiftStudioProvider>
   );

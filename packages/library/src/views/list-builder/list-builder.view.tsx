@@ -70,9 +70,9 @@ export const ListBuilderComponent = ({}: ListBuilderProps) => {
   );
 };
 
-export const ListBuilder = () => {
+export const ListBuilder = ({ listId }: { listId: string }) => {
   return (
-    <ListBuilderProvider>
+    <ListBuilderProvider listId={listId}>
       <ListBuilderComponent />
     </ListBuilderProvider>
   );

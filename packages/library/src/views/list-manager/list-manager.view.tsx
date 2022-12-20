@@ -7,7 +7,6 @@ import {
   SlideMenu,
   EntityBar,
   Card,
-  MoreMenu,
   Bar,
 } from '../../components';
 
@@ -85,9 +84,9 @@ export const ListManagerComponent =
     );
   };
 
-export const ListManager = () => {
+export const ListManager = ({ workshopId }: { workshopId: string }) => {
   return (
-    <ListManagerProvider>
+    <ListManagerProvider workshopId={workshopId}>
       <ListManagerComponent />
     </ListManagerProvider>
   );
