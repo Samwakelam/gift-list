@@ -7,4 +7,5 @@ export const mockWidgetData: Widget = {
   description: 'Add an image to your gift',
   thumbnail: './image.jpg',
   icon: { icon: 'camera', ariaLabel: 'image', fill: FillType.SOLID },
+  config: {},
 };

@@ -25,7 +25,7 @@ export const SharingModal = ({
       <ul className={tw(S.UserListCss)}>
         {allUsers.map((user) => {
           return (
-            <li key={user.id} className={tw(S.ListItemCss)}>
+            <li key={user._id} className={tw(S.ListItemCss)}>
               <UserImage
                 src={user.image}
                 grayscale={!state.checked.includes(user)}
@@ -33,7 +33,7 @@ export const SharingModal = ({
 
               <CheckboxGroup
                 labelText={user.name}
-                value={user.id}
+                value={user._id}
                 onChecked={onChecked}
                 checked={state.checked.includes(user)}
               />

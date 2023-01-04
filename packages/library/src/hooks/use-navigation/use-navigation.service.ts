@@ -1,14 +1,14 @@
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 
 export interface NavigationService {
   navigate: (location: string) => void;
 }
 
 export const useNavigation = (): NavigationService => {
-  const _navigate = useNavigate();
+  // const router = useRouter();
 
   const navigate = (location: string) => {
-    _navigate(location);
+    // router.push(location);
   };
 
   return { navigate };

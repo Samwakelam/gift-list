@@ -14,6 +14,7 @@ export type ListManagerHandlers = {
   ) => Promise<void>;
   removeList: (id: string, callback: (result: boolean) => void) => void;
   removeWorkshop: () => Promise<void>;
+  resolveLink: (label: string) => string;
 };
 
 export type ListManagerState = {

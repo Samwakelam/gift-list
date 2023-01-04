@@ -3,7 +3,7 @@ import { CheckboxGroup } from '../../../src/forms/molecules/checkbox-group';
 
 export default {
   ['Unchecked']: () => {
-    const [checked, setChecked] = useState<boolean>(false);
+    const [isChecked, setChecked] = useState<boolean>(true);
 
     return (
       <div style={{ width: '34rem', padding: '2rem' }}>
@@ -11,14 +11,14 @@ export default {
           labelText="Checkbox"
           value="checkbox"
           id="checkbox"
-          checked={checked}
-          onChecked={(value, isChecked) => setChecked(isChecked)}
+          checked={isChecked}
+          onChecked={({ value, checked }) => setChecked(checked)}
         />
       </div>
     );
   },
   ['Checked']: () => {
-    const [checked, setChecked] = useState<boolean>(true);
+    const [isChecked, setChecked] = useState<boolean>(true);
 
     return (
       <div style={{ width: '34rem', padding: '2rem' }}>
@@ -26,8 +26,8 @@ export default {
           labelText="Checkbox"
           value="checkbox"
           id="checkbox"
-          checked={checked}
-          onChecked={(value, isChecked) => setChecked(isChecked)}
+          checked={isChecked}
+          onChecked={({ value, checked }) => setChecked(checked)}
         />
       </div>
     );

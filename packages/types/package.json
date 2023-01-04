@@ -2,7 +2,7 @@
   "name": "@sam/types",
   "version": "1.0.0",
   "description": "",
-  "main": "./index.js",
+  "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@sam/icons": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4"
   }
 }

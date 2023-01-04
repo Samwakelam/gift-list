@@ -10,10 +10,10 @@ const serviceMock = mock<WorkshopManagerContract>();
 when(serviceMock.createWorkshop(anything())).thenCall(
   (workshop: Omit<Workshop, 'id'>) => {
     const mockWorkshop: Workshop = {
-      id: `test-workshop-id-${Math.round(Math.random() * 100)}-${Math.round(
+      ...workshop,
+      _id: `test-workshop-id-${Math.round(Math.random() * 100)}-${Math.round(
         Math.random() * 100
       )}`,
-      ...workshop,
     };
 
     mockOwnerData[0].workshops.push(mockWorkshop);
@@ -26,7 +26,7 @@ when(serviceMock.getOwner()).thenCall(async () => {
 
   let filledConnections: any[] = [];
   connections.forEach((connection) => {
-    const _owner = mockOwnerData.find((owner) => owner.id === connection);
+    const _owner = mockOwnerData.find((owner) => owner._id === connection);
     filledConnections.push(_owner);
   });
 
@@ -36,7 +36,7 @@ when(serviceMock.getOwner()).thenCall(async () => {
 });
 
 when(serviceMock.getOwnerById(anything())).thenCall((id: string) => {
-  return mockOwnerData.find((owner) => owner.id === id);
+  return mockOwnerData.find((owner) => owner._id === id);
 });
 
 when(serviceMock.updateOwner(anything())).thenResolve();
@@ -44,14 +44,14 @@ when(serviceMock.updateOwner(anything())).thenResolve();
 when(serviceMock.updateWorkshopById(anything(), anything())).thenCall(
   (id: string, workshop: Workshop) => {
     const index = mockOwnerData[0].workshops.findIndex(
-      (shop) => shop.id === id
+      (shop) => shop._id === id
     );
     mockOwnerData[0].workshops[index] = workshop;
   }
 );
 
 when(serviceMock.deleteWorkshopById(anything())).thenCall((id: string) => {
-  const index = mockOwnerData[0].workshops.findIndex((shop) => shop.id === id);
+  const index = mockOwnerData[0].workshops.findIndex((shop) => shop._id === id);
   mockOwnerData[0].workshops.splice(index, 1);
 });
 

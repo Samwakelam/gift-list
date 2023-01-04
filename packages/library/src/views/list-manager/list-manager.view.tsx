@@ -1,6 +1,8 @@
 import { ReactElement, useState } from 'react';
 import { tw } from 'twind';
 
+import { Workshop } from '@sam/types';
+
 import {
   EntityCard,
   NoResults,
@@ -29,8 +31,16 @@ export const ListManagerComponent =
           subTitle={'Gift List'}
           title={'List Manager'}
           links={[
-            { label: 'Workshops', href: '/', isActive: false },
-            { label: 'List Manager', href: '/', isActive: true },
+            {
+              label: 'Workshops',
+              href: handlers.resolveLink('workshop-manager'),
+              isActive: false,
+            },
+            {
+              label: 'List Manager',
+              href: handlers.resolveLink('list-manager'),
+              isActive: true,
+            },
           ]}
           isOpen={menuOpen}
           onRequestClose={() => setMenuOpen(false)}
@@ -56,7 +66,7 @@ export const ListManagerComponent =
                 {state.workshop.lists.length > 0 ? (
                   state.workshop.lists.map((list) => {
                     return (
-                      <Card key={list.id}>
+                      <Card key={list._id}>
                         <EntityCard
                           allUsers={state.connections}
                           entity={list}
@@ -84,9 +94,9 @@ export const ListManagerComponent =
     );
   };
 
-export const ListManager = ({ workshopId }: { workshopId: string }) => {
+export const ListManager = ({ workshop }: { workshop: Workshop }) => {
   return (
-    <ListManagerProvider workshopId={workshopId}>
+    <ListManagerProvider workshop={workshop}>
       <ListManagerComponent />
     </ListManagerProvider>
   );

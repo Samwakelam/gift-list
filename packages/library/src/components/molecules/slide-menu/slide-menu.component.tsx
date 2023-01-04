@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import ReactModal from 'react-modal';
 import { tw } from 'twind';
 
@@ -22,7 +22,7 @@ export const SlideMenu = ({
   useEffect(() => {
     // FIXES Warning: react-modal: App element is not defined. Please use Modal.setAppElement(el) or set appElement={el}
     // This is due to using serverside rendering.
-    ReactModal.setAppElement('#slide-menu-parent');
+    ReactModal.setAppElement('body');
   }, []);
 
   return (

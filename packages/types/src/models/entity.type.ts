@@ -1,7 +1,7 @@
 import { Owner } from './owner.type';
 
 export type Entity = {
-  id: string;
+  _id: string;
   name: string;
   lookupKey: string;
   createdAt: Date;

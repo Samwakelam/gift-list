@@ -8,7 +8,7 @@ interface MockOwner extends Omit<Owner, 'connections'> {
 
 export const mockOwnerData: MockOwner[] = [
   {
-    id: 'test-owner-id-1',
+    _id: 'test-owner-id-1',
     name: 'sam',
     workshops: [
       { ...mockWorkshopData, visibility: { isVisible: true, sharedWith: [] } },
@@ -17,35 +17,35 @@ export const mockOwnerData: MockOwner[] = [
     image: null,
   },
   {
-    id: 'test-owner-id-2',
+    _id: 'test-owner-id-2',
     name: 'dave',
     workshops: [],
     connections: [],
     image: null,
   },
   {
-    id: 'test-owner-id-3',
+    _id: 'test-owner-id-3',
     name: 'julie',
     workshops: [],
     connections: [],
     image: null,
   },
   {
-    id: 'test-owner-id-4',
+    _id: 'test-owner-id-4',
     name: 'stuart',
     workshops: [],
     connections: [],
     image: null,
   },
   {
-    id: 'test-owner-id-5',
+    _id: 'test-owner-id-5',
     name: 'lizzie',
     workshops: [],
     connections: [],
     image: null,
   },
   {
-    id: 'test-owner-id-6',
+    _id: 'test-owner-id-6',
     name: 'rosemary',
     workshops: [],
     connections: [],

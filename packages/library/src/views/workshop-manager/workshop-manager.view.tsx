@@ -1,7 +1,7 @@
 import { ReactElement, useState } from 'react';
 import { tw } from 'twind';
 
-import { Workshop } from '@sam/types';
+import { Owner, Workshop } from '@sam/types';
 
 import {
   Card,
@@ -32,7 +32,13 @@ export const WorkshopManagerComponent =
     return (
       <main className={tw(S.WorkshopManagerCss)}>
         <SlideMenu
-          links={[{ label: 'Workshops', href: '/', isActive: true }]}
+          links={[
+            {
+              label: 'Workshops',
+              href: handlers.resolveLink(),
+              isActive: true,
+            },
+          ]}
           title="Workshops"
           subTitle="Gift List"
           isOpen={menuOpen}
@@ -58,7 +64,7 @@ export const WorkshopManagerComponent =
             {state.workshops.length > 0 ? (
               state.workshops.map((workshop: Workshop) => {
                 return (
-                  <Card key={workshop.id}>
+                  <Card key={workshop._id}>
                     <EntityCard
                       allUsers={state.connections}
                       entity={workshop}
@@ -82,9 +88,9 @@ export const WorkshopManagerComponent =
     );
   };
 
-export const WorkshopManager = ({ userId }: { userId: string }) => {
+export const WorkshopManager = ({ user }: { user: Owner }) => {
   return (
-    <WorkshopManagerProvider userId={userId}>
+    <WorkshopManagerProvider user={user}>
       <WorkshopManagerComponent />
     </WorkshopManagerProvider>
   );

@@ -70,7 +70,7 @@ export const useEntityModal = (
 
     const name = nameInput.state.value;
 
-    const entity: Omit<Entity, 'id'> = {
+    const entity: Omit<Entity, '_id'> = {
       name,
       lookupKey: '',
       createdAt: new Date(),

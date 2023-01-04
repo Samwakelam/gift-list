@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, WidgetCard, WidgetCardType } from '../../../../src';
 
 import { mockWidgetData } from '../../../../__synthetic__/widget.data';

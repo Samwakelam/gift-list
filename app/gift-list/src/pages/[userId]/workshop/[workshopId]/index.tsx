@@ -3,22 +3,24 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { ListManager } from '@sam/library';
+import { Workshop } from '@sam/types';
+import { getWorkshop } from 'src/pages/api/workshops/[id]';
 
 type ListManagerAppProps = {
-  workshopId?: string;
+  workshop?: Workshop;
   error?: boolean;
 };
 
-const ListManagerApp = ({ workshopId, error }: ListManagerAppProps) => {
+const ListManagerApp = ({ workshop, error }: ListManagerAppProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (error || !workshopId) {
+    if (error || !workshop) {
       router.push('/404');
     }
   }, []);
-
-  return <ListManager workshopId={workshopId} />;
+  if (!workshop) return null;
+  return <ListManager workshop={workshop} />;
 };
 
 export default ListManagerApp;
@@ -35,9 +37,13 @@ export const getServerSideProps = async ({
 
   const workshopId: string = params.workshopId as string;
 
+  const response = await getWorkshop(workshopId);
+
+  const workshop = JSON.parse(JSON.stringify(response.json.data))[0];
+
   return {
     props: {
-      workshopId,
+      workshop,
     },
   };
 };

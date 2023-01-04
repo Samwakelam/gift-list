@@ -3,22 +3,26 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { WorkshopManager } from '@sam/library';
+import { Owner } from '@sam/types';
+
+import { getOwner } from '../api/owners/[id]';
 
 type WorkshopManagerAppProps = {
-  userId?: string;
+  user?: Owner;
   error?: boolean;
 };
 
-const WorkshopManagerApp = ({ userId, error }: WorkshopManagerAppProps) => {
+const WorkshopManagerApp = ({ user, error }: WorkshopManagerAppProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (error || !userId) {
+    if (error || !user) {
       router.push('/404');
     }
   }, []);
 
-  return <WorkshopManager userId={userId} />;
+  if (!user) return null;
+  return <WorkshopManager user={user} />;
 };
 
 export default WorkshopManagerApp;
@@ -35,9 +39,13 @@ export const getServerSideProps = async ({
 
   const userId: string = params.userId as string;
 
+  const response = await getOwner(userId);
+
+  const user = JSON.parse(JSON.stringify(response.json.data))[0];
+
   return {
     props: {
-      userId,
+      user,
     },
   };
 };

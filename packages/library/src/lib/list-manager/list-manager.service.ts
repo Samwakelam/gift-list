@@ -5,16 +5,16 @@ import { List, Workshop } from '@sam/types';
 import { ListManagerContract } from './list-manager.contract';
 
 export class ListManagerService implements ListManagerContract {
-  readonly workshopId: string;
+  readonly workshop: Workshop;
 
-  constructor(workshopId: string) {
-    this.workshopId = workshopId;
+  constructor(workshop: Workshop) {
+    this.workshop = workshop;
   }
 
   async createList(list: Omit<List, 'id'>): Promise<void> {}
 
   async getWorkshop(): Promise<Workshop | null> {
-    return null;
+    return this.workshop;
   }
 
   async updateWorkshop(workshop: Workshop): Promise<void> {}
@@ -24,7 +24,7 @@ export class ListManagerService implements ListManagerContract {
   async deleteListById(id: string): Promise<void> {}
 }
 
-export function useListManagerService(workshopId: string): ListManagerService {
-  const manager = useRef(new ListManagerService(workshopId)).current;
+export function useListManagerService(workshop: Workshop): ListManagerService {
+  const manager = useRef(new ListManagerService(workshop)).current;
   return manager;
 }

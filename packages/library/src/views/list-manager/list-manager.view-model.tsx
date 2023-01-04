@@ -1,3 +1,5 @@
+import { Workshop } from '@sam/types';
+import { useRouter } from 'next/router';
 import {
   createContext,
   ReactElement,
@@ -6,7 +8,6 @@ import {
   useState,
 } from 'react';
 
-import { mockWorkshopData } from '../../../__synthetic__/workshop.data';
 import { useListManagerService } from '../../lib/list-manager';
 
 import {
@@ -30,6 +31,7 @@ export const ListManagerContext = createContext<{
     editWorkshop: async () => {},
     removeList: async () => {},
     removeWorkshop: async () => {},
+    resolveLink: () => '',
   },
 });
 
@@ -38,13 +40,13 @@ export const useListManager = () => {
 };
 
 export const ListManagerProvider = ({
-  workshopId,
+  workshop,
   children,
 }: {
-  workshopId: string;
+  workshop: Workshop;
   children?: ReactElement;
 }) => {
-  const ListManagerService = useListManagerService(workshopId);
+  const ListManagerService = useListManagerService(workshop);
 
   const [state, setState] = useState<ListManagerState>({
     workshop: null,
@@ -87,7 +89,7 @@ export const ListManagerProvider = ({
 
   const editList: ListManagerHandlers['editList'] = async (list, isSuccess) => {
     try {
-      await ListManagerService.updateListById(list.id, list);
+      await ListManagerService.updateListById(list._id, list);
 
       isSuccess(true);
 
@@ -129,6 +131,24 @@ export const ListManagerProvider = ({
 
   const removeWorkshop = async () => {};
 
+  const resolveLink: ListManagerHandlers['resolveLink'] = (
+    location: string
+  ) => {
+    const router = useRouter();
+
+    switch (location) {
+      case 'workshop-manager': {
+        return `/${router.query.userId}/workshop-manager`;
+      }
+      case 'site-manager': {
+        return `/${router.query.userId}/workshop/${router.query.workshopId}`;
+      }
+      default: {
+        return '/';
+      }
+    }
+  };
+
   useEffect(function onMount() {
     const onMount = async () => {
       await Promise.all([fetchWorkshop()]);
@@ -148,6 +168,7 @@ export const ListManagerProvider = ({
           editWorkshop,
           removeList,
           removeWorkshop,
+          resolveLink,
         },
       }}
     >

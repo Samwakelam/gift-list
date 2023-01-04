@@ -1,7 +1,7 @@
 import { Workshop } from './workshop.type';
 
 export interface Owner {
-  id: string;
+  _id: string;
   name: string;
   image: string | null;
   workshops: Workshop[];

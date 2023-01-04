@@ -1,1 +1,2 @@
-declare module '@sam/library';
+/// <reference types="@sam/types" />
+/// <reference types="@sam/library" />

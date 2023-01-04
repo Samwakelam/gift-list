@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelect } from 'react-cosmos/fixture';
 
 import { Button, ButtonVariant } from '../../../src';

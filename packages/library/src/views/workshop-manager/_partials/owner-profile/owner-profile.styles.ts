@@ -17,6 +17,13 @@ export const UserIdCss = css({
     alignItems: 'center',
     width: '100%',
   },
+
+  '& > p': {
+    textOverflow: 'ellipsis',
+    width: theme('spacing.112'),
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+  },
 });
 
 export const UserListCss = css({

@@ -8,7 +8,7 @@ export default {
       <Modal isOpen={true} onRequestClose={() => {}}>
         <ConfirmModal
           type={ConfirmModalType.DELETE}
-          item={mockListData}
+          entity={mockListData}
           title="Are you sure?"
           description="This will delete this item."
           onClose={() => {}}

@@ -6,13 +6,16 @@ import {
   useState,
 } from 'react';
 
+import { Owner } from '@sam/types';
+
+import { useWorkshopManagerService } from '../../lib';
+
 import {
   WorkshopManagerHandlers,
   WorkshopManagerState,
 } from './workshop-manager.definition';
 
-import { mockOwnerData } from '../../../__synthetic__/owner.data';
-import { useWorkshopManagerService } from '../../lib';
+import { useRouter } from 'next/router';
 
 export const WorkshopManagerContext = createContext<{
   state: WorkshopManagerState;
@@ -30,6 +33,7 @@ export const WorkshopManagerContext = createContext<{
     editWorkshop: async (workshop, callback) => {},
     removeConnection: () => {},
     removeWorkshop: async (id, callback) => {},
+    resolveLink: () => '/',
   },
 });
 
@@ -38,13 +42,13 @@ export const useWorkshopManager = () => {
 };
 
 export const WorkshopManagerProvider = ({
-  userId,
+  user,
   children,
 }: {
-  userId: string;
+  user: Owner;
   children?: ReactElement;
 }) => {
-  const WorkshopManagerService = useWorkshopManagerService(userId);
+  const WorkshopManagerService = useWorkshopManagerService(user);
 
   const [state, setState] = useState<WorkshopManagerState>({
     connections: [],
@@ -103,10 +107,13 @@ export const WorkshopManagerProvider = ({
         },
       };
 
-      await WorkshopManagerService.createWorkshop(_workshop);
-      isSuccess(true);
+      const response = await WorkshopManagerService.createWorkshop(_workshop);
+      if (response) {
+        isSuccess(true);
 
-      await fetchOwner();
+        // useNavigation().navigate(`${state.owner}/workspace/${response._id}`);
+        await fetchOwner();
+      }
     } catch (e) {
       isSuccess(false);
     }
@@ -117,7 +124,7 @@ export const WorkshopManagerProvider = ({
     isSuccess
   ): Promise<void> => {
     try {
-      await WorkshopManagerService.updateWorkshopById(workshop.id, workshop);
+      await WorkshopManagerService.updateWorkshopById(workshop._id, workshop);
 
       isSuccess(true);
 
@@ -131,7 +138,7 @@ export const WorkshopManagerProvider = ({
     try {
       const connections = [...state.connections];
       const updatedConnections = connections.filter((connection) => {
-        return connection.id !== id;
+        return connection._id !== id;
       });
 
       setState((prev) => ({
@@ -156,6 +163,14 @@ export const WorkshopManagerProvider = ({
     }
   };
 
+  const resolveLink: WorkshopManagerHandlers['resolveLink'] = () => {
+    const router = useRouter();
+
+    const path = `/${router.query.userId}/workshop-manager`;
+
+    return path;
+  };
+
   useEffect(function onMount() {
     const onMount = async () => {
       await Promise.all([fetchOwner()]);
@@ -175,6 +190,7 @@ export const WorkshopManagerProvider = ({
           editWorkshop,
           removeConnection,
           removeWorkshop,
+          resolveLink,
         },
       }}
     >

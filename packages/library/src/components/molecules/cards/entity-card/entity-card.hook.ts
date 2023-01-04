@@ -1,55 +1,71 @@
-import { Hook } from '@sam/types';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+
+import { Hook, isList, isWorkshop } from '@sam/types';
 
 import {
-    EntityCardState,
-    EntityCardHandlers,
-    EntityCardProps,
+  EntityCardState,
+  EntityCardHandlers,
+  EntityCardProps,
 } from './entity-card.definition';
 
 export const useEntityCard = (
-    entity: EntityCardProps['entity'],
-    dispatches: EntityCardProps['dispatches']
+  entity: EntityCardProps['entity'],
+  dispatches: EntityCardProps['dispatches']
 ): Hook<EntityCardState, EntityCardHandlers> => {
-    const { onEdit } = dispatches;
+  const { onEdit } = dispatches;
 
-    const [state, setState] = useState<EntityCardState>({
-        isModalOpen: false,
-    });
+  const [state, setState] = useState<EntityCardState>({
+    isModalOpen: false,
+  });
 
-    const onEditVisibility: EntityCardHandlers['onEditVisibility'] = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+  const onEditVisibility: EntityCardHandlers['onEditVisibility'] = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-        const _entity = {
-            ...entity,
-            visibility: {
-                ...entity.visibility,
-                isVisible: !entity.visibility.isVisible,
-            },
-        };
-
-        onEdit(_entity, (result: boolean) => {});
+    const _entity = {
+      ...entity,
+      visibility: {
+        ...entity.visibility,
+        isVisible: !entity.visibility.isVisible,
+      },
     };
 
-    const onEditSharing: EntityCardHandlers['onEditSharing'] = (
-        checked,
-        isSuccess
-    ) => {
-        const _entity = {
-            ...entity,
-            visibility: { ...entity.visibility, sharedWith: checked },
-        };
+    onEdit(_entity, (result: boolean) => {});
+  };
 
-        onEdit(_entity, isSuccess);
+  const onEditSharing: EntityCardHandlers['onEditSharing'] = (
+    checked,
+    isSuccess
+  ) => {
+    const _entity = {
+      ...entity,
+      visibility: { ...entity.visibility, sharedWith: checked },
     };
 
-    const resolveModal: EntityCardHandlers['resolveModal'] = (isOpen) => {
-        setState((prev) => ({ ...prev, isModalOpen: isOpen }));
-    };
+    onEdit(_entity, isSuccess);
+  };
 
-    return {
-        state,
-        handlers: { onEditVisibility, onEditSharing, resolveModal },
-    };
+  const resolveModal: EntityCardHandlers['resolveModal'] = (isOpen) => {
+    setState((prev) => ({ ...prev, isModalOpen: isOpen }));
+  };
+
+  const resolveLink: EntityCardHandlers['resolveLink'] = () => {
+    // const router = useRouter();
+
+    // if (isList(entity)) {
+    //   return `${router.query.userId}/workshop/${router.query.workshopId}/list/${entity._id}`;
+    // }
+
+    // if (isWorkshop(entity)) {
+    //   return `/${router.query.userId}/workshop/${entity._id}`;
+    // }
+
+    return '/';
+  };
+
+  return {
+    state,
+    handlers: { onEditVisibility, onEditSharing, resolveModal, resolveLink },
+  };
 };

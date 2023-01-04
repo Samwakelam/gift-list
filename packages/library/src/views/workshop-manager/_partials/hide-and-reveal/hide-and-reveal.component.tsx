@@ -46,7 +46,7 @@ export const HideAndReveal = ({
           >
             <Button
               icon={{
-                icon: 'eye-on',
+                icon: 'eye-off',
                 ariaLabel: 'view',
                 fill: FillType.OUTLINE,
               }}

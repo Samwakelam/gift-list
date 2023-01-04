@@ -1,7 +1,7 @@
-import React from 'react';
 import { useSelect } from 'react-cosmos/fixture';
 
 import { EntityModal, EntityModalType, Modal } from '../../../../src';
+
 import { mockListData } from '../../../../__synthetic__/list.data';
 import { mockWorkshopData } from '../../../../__synthetic__/workshop.data';
 

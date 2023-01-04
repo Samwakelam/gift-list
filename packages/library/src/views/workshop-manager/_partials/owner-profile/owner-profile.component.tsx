@@ -7,10 +7,8 @@ import {
   AddConnectionModal,
   Button,
   ButtonVariant,
-  DirectionType,
   Modal,
   NoResults,
-  Tooltip,
   UserImage,
 } from '../../../../components';
 
@@ -25,7 +23,7 @@ export const OwnerProfile = ({
   owner,
   users,
 }: OwnerProfileProps): ReactElement<OwnerProfileProps> => {
-  const { id } = owner;
+  const { _id } = owner;
 
   const userRef = useRef<HTMLParagraphElement>(null);
 
@@ -45,12 +43,12 @@ export const OwnerProfile = ({
       <HideAndReveal
         coverElement={
           <div>
-            <p>Link code:</p>
+            <p>Your connection code:</p>
           </div>
         }
         hiddenElement={
           <div className={tw(S.UserIdCss)}>
-            <p ref={userRef}>{id}</p>
+            <p ref={userRef}>{_id}</p>
             <Button
               icon={{
                 icon: 'copy',
@@ -71,7 +69,7 @@ export const OwnerProfile = ({
         <ul className={tw(S.UserListCss)}>
           {users.map((user) => {
             return (
-              <li key={user.id} className={tw(S.ListItemCss)}>
+              <li key={user._id} className={tw(S.ListItemCss)}>
                 <UserImage src={user.image} />
                 <p className={tw(S.UserNameCss)}>{user.name}</p>
                 <DeleteUserModal user={user} />

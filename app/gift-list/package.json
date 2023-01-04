@@ -14,7 +14,9 @@
   "license": "ISC",
   "dependencies": {
     "@sam/library": "workspace:*",
+    "@sam/types": "workspace:*",
     "@twind/next": "^1.0.10",
+    "mongoose": "^6.8.1",
     "next": "^13.0.5",
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^10.0.0",
@@ -30,7 +32,6 @@
   },
   "peerDependencies": {
     "@sam/icons": "workspace:*",
-    "@sam/theme": "workspace:*",
-    "@sam/types": "workspace:*"
+    "@sam/theme": "workspace:*"
   }
 }

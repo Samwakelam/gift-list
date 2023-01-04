@@ -2,6 +2,7 @@
 
 import { ConfigEnv, defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import * as process from 'process';
 
 // https://vitejs.dev/config/

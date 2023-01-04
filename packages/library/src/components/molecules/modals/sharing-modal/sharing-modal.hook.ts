@@ -30,11 +30,11 @@ export const useSharingModal = (
     checked,
     value: id,
   }) => {
-    const isInState = state.checked.some((user) => user.id === id);
+    const isInState = state.checked.some((user) => user._id === id);
 
     if (!isInState && checked) {
       const checkedState = [...state.checked];
-      const userIndex = allUsers.findIndex((item) => item.id === id);
+      const userIndex = allUsers.findIndex((item) => item._id === id);
       checkedState.push(allUsers[userIndex]);
 
       setState((prev) => ({
@@ -45,7 +45,7 @@ export const useSharingModal = (
 
     if (isInState && !checked) {
       const checkedState = [...state.checked];
-      const index = checkedState.findIndex((item) => item.id === id);
+      const index = checkedState.findIndex((item) => item._id === id);
       checkedState.splice(index, 1);
 
       setState((prev) => ({
@@ -66,7 +66,7 @@ export const useSharingModal = (
   useEffect(() => {
     const checked: Owner[] = [];
     allUsers.forEach((user) => {
-      if (checkedUsers.some((checkedUser) => checkedUser.id === user.id)) {
+      if (checkedUsers.some((checkedUser) => checkedUser._id === user._id)) {
         checked.push(user);
       }
     });

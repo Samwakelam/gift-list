@@ -34,7 +34,7 @@ export const useConfirmModal = (
     e.stopPropagation();
 
     setState((prev) => ({ ...prev, isProcessing: true }));
-    onRemove(item.id, isSuccess);
+    onRemove(item._id, isSuccess);
   };
 
   const resolveConfirmButton = (): ButtonProps => {
