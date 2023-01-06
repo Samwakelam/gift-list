@@ -5,10 +5,10 @@ export interface NavigationService {
 }
 
 export const useNavigation = (): NavigationService => {
-  // const router = useRouter();
+  const router = useRouter();
 
   const navigate = (location: string) => {
-    // router.push(location);
+    router.push(location);
   };
 
   return { navigate };

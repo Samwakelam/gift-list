@@ -1,6 +1,6 @@
+import { useEffect } from 'react';
 import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 import { WorkshopManager } from '@sam/library';
 import { Owner } from '@sam/types';

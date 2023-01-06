@@ -15,7 +15,7 @@ import {
   WorkshopManagerState,
 } from './workshop-manager.definition';
 
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
 export const WorkshopManagerContext = createContext<{
   state: WorkshopManagerState;
@@ -164,11 +164,11 @@ export const WorkshopManagerProvider = ({
   };
 
   const resolveLink: WorkshopManagerHandlers['resolveLink'] = () => {
-    const router = useRouter();
+    // const router = useRouter();
 
-    const path = `/${router.query.userId}/workshop-manager`;
+    // const path = `/${router.query.userId}/workshop-manager`;
 
-    return path;
+    return '/';
   };
 
   useEffect(function onMount() {

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-// import Link from 'next/link';
+
 import { tw } from 'twind';
 
 import { isList, isWorkshop, Owner } from '@sam/types';

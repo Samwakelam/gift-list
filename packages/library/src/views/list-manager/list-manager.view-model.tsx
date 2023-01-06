@@ -134,14 +134,14 @@ export const ListManagerProvider = ({
   const resolveLink: ListManagerHandlers['resolveLink'] = (
     location: string
   ) => {
-    const router = useRouter();
+    // const router = useRouter();
 
     switch (location) {
       case 'workshop-manager': {
-        return `/${router.query.userId}/workshop-manager`;
+        // return `/${router.query.userId}/workshop-manager`;
       }
       case 'site-manager': {
-        return `/${router.query.userId}/workshop/${router.query.workshopId}`;
+        // return `/${router.query.userId}/workshop/${router.query.workshopId}`;
       }
       default: {
         return '/';

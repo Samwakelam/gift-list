@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 
 import { Hook, isList, isWorkshop } from '@sam/types';
 

@@ -1,4 +1,3 @@
-// import Link from 'next/link';
 import { tw } from 'twind';
 
 import { SlideMenuLinkProps } from './side-menu-link.definition';
