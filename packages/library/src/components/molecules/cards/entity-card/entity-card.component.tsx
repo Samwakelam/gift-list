@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-
+import Link from 'next/link';
 import { tw } from 'twind';
 
 import { isList, isWorkshop, Owner } from '@sam/types';
@@ -119,7 +119,7 @@ export const EntityCard = ({
         </Tooltip>
       </div>
 
-      <a
+      <Link
         href={resolveLink()}
         className={tw(
           S.ContentCss,
@@ -166,7 +166,7 @@ export const EntityCard = ({
           <Icon icon="clock" ariaLabel="clock" fill={FillType.OUTLINE} />
           {getRelativeDateTime(entity.createdAt)}
         </p>
-      </a>
+      </Link>
 
       <MoreMenu
         entity={entity}

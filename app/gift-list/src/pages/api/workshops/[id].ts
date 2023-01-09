@@ -46,6 +46,18 @@ const updateWorkshop = async (
   }
 };
 
+const deleteWorkshop = async (id: string): Promise<ResponseProps> => {
+  await databaseConnection();
+
+  try {
+    const data = await WorkshopsModel.deleteOne({ _id: id });
+
+    return { status: 200, json: { message: 'Success', data } };
+  } catch (error) {
+    return { status: 500, json: { message: 'Error', error } };
+  }
+};
+
 export default async (
   req: NextApiRequest,
   res: NextApiResponse
@@ -58,6 +70,10 @@ export default async (
     case 'PUT': {
       const putData = await updateWorkshop(req.query.id as string, req.body);
       return res.status(putData.status).json(putData.json);
+    }
+    case 'DELETE': {
+      const deleteData = await deleteWorkshop(req.query.id as string);
+      return res.status(deleteData.status).json(deleteData.json);
     }
     default: {
       return res.status(405).json({ message: 'Status not allowed' });

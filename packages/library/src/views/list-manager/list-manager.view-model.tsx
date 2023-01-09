@@ -1,5 +1,3 @@
-import { Workshop } from '@sam/types';
-import { useRouter } from 'next/router';
 import {
   createContext,
   ReactElement,
@@ -7,6 +5,9 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { useRouter } from 'next/router';
+
+import { Workshop } from '@sam/types';
 
 import { useListManagerService } from '../../lib/list-manager';
 
@@ -134,14 +135,14 @@ export const ListManagerProvider = ({
   const resolveLink: ListManagerHandlers['resolveLink'] = (
     location: string
   ) => {
-    // const router = useRouter();
+    const router = useRouter();
 
     switch (location) {
       case 'workshop-manager': {
-        // return `/${router.query.userId}/workshop-manager`;
+        return `/${router.query.userId}/workshop-manager`;
       }
       case 'site-manager': {
-        // return `/${router.query.userId}/workshop/${router.query.workshopId}`;
+        return `/${router.query.userId}/workshop/${router.query.workshopId}`;
       }
       default: {
         return '/';

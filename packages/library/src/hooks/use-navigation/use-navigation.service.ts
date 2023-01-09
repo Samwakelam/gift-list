@@ -1,14 +1,15 @@
 import { useRouter } from 'next/router';
 
 export interface NavigationService {
-  navigate: (location: string) => void;
+  navigate: (href: string) => void;
 }
 
 export const useNavigation = (): NavigationService => {
   const router = useRouter();
+  console.log('router: ', router);
 
-  const navigate = (location: string) => {
-    router.push(location);
+  const navigate = (href: string) => {
+    router.push(href);
   };
 
   return { navigate };

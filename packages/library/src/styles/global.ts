@@ -93,6 +93,7 @@ export const globalStyles = css({
     },
     button: {
       border: 'unset',
+      fontFamily: theme('fontFamily.roboto'),
     },
     label: {
       fontSize: tokens.text.body.standard,

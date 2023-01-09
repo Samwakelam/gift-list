@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { useRouter } from 'next/router';
 
 import { Owner } from '@sam/types';
 
@@ -14,8 +15,7 @@ import {
   WorkshopManagerHandlers,
   WorkshopManagerState,
 } from './workshop-manager.definition';
-
-// import { useRouter } from 'next/router';
+import { useNavigation } from '../../hooks';
 
 export const WorkshopManagerContext = createContext<{
   state: WorkshopManagerState;
@@ -49,6 +49,8 @@ export const WorkshopManagerProvider = ({
   children?: ReactElement;
 }) => {
   const WorkshopManagerService = useWorkshopManagerService(user);
+  const { navigate } = useNavigation();
+  const router = useRouter();
 
   const [state, setState] = useState<WorkshopManagerState>({
     connections: [],
@@ -108,11 +110,16 @@ export const WorkshopManagerProvider = ({
       };
 
       const response = await WorkshopManagerService.createWorkshop(_workshop);
+
       if (response) {
+        setState((prev) => ({
+          ...prev,
+          workshops: [...state.workshops, response],
+        }));
+
         isSuccess(true);
 
-        // useNavigation().navigate(`${state.owner}/workspace/${response._id}`);
-        await fetchOwner();
+        navigate(`/${router.query.userId}/workspace/${response._id}`);
       }
     } catch (e) {
       isSuccess(false);
@@ -164,11 +171,9 @@ export const WorkshopManagerProvider = ({
   };
 
   const resolveLink: WorkshopManagerHandlers['resolveLink'] = () => {
-    // const router = useRouter();
+    const path = `/${router.query.userId}/workshop-manager`;
 
-    // const path = `/${router.query.userId}/workshop-manager`;
-
-    return '/';
+    return path;
   };
 
   useEffect(function onMount() {

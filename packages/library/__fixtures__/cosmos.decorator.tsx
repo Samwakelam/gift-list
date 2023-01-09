@@ -9,14 +9,5 @@ import { globalStyles } from '../src/styles/global';
 export default ({ children }: { children: ReactNode }) => {
   setup(themeConfig);
 
-  return (
-    <Router>
-      <Routes>
-        <Route
-          path="/_renderer.html"
-          element={<div className={tw(css(globalStyles))}>{children}</div>}
-        />
-      </Routes>
-    </Router>
-  );
+  return <div className={tw(css(globalStyles))}>{children}</div>;
 };

@@ -3,7 +3,7 @@ import { css, theme } from 'twind/css';
 export const HideAndRevealCss = css({
   '&': {
     backgroundColor: theme('colors.neutral.50'),
-    borderRadius: theme('spacing.8'),
+    borderRadius: theme('spacing.4'),
     paddingTop: theme('spacing.16'),
     paddingBottom: theme('spacing.16'),
     paddingLeft: theme('spacing.32'),

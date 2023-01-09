@@ -5,7 +5,7 @@ export interface WorkshopManagerContract {
   getOwner(): Promise<Owner | null>;
   getOwnerById(id: string): Promise<Owner | null>;
   getConnectionById(id: string): Promise<Owner | null>;
-  updateOwner(owner: Owner): Promise<void>;
-  updateWorkshopById(id: string, workshop: Workshop): Promise<void>;
+  updateOwner(owner: Owner): Promise<Owner | null>;
+  updateWorkshopById(id: string, workshop: Workshop): Promise<Workshop | null>;
   deleteWorkshopById(id: string): Promise<void>;
 }

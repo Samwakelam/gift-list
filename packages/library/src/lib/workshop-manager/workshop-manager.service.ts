@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import * as process from 'process';
 
 import { Owner, Workshop } from '@sam/types';
 
@@ -26,12 +25,14 @@ export class WorkshopManagerService implements WorkshopManagerContract {
       owner: this.owner._id,
     });
 
-    if (fetchData.message === 'Error') throw new Error(fetchData.error);
+    if (fetchData.message === 'Error')
+      throw new Error(`Error: ${fetchData.error}`);
 
     const workshops: Workshop[] = [...this.owner.workshops];
     workshops.push(fetchData.data);
 
     this.updateOwner({ ...this.owner, workshops });
+
     return fetchData.data;
   }
 
@@ -52,7 +53,7 @@ export class WorkshopManagerService implements WorkshopManagerContract {
     return null;
   }
 
-  async updateOwner(owner: Owner): Promise<void> {
+  async updateOwner(owner: Owner): Promise<Owner> {
     const host = window.location.host;
     const absoluteURL = `${this.env}://${host}/api/owners/${owner._id}`;
 
@@ -61,15 +62,21 @@ export class WorkshopManagerService implements WorkshopManagerContract {
 
     const fetchData = await getFetcher(absoluteURL, 'PUT', owner);
 
-    if (fetchData.message === 'Error') throw new Error(fetchData.error);
+    if (fetchData.message === 'Error')
+      throw new Error(`Error: ${fetchData.error}`);
 
     if (fetchData.data.modifiedCount === 0) {
       this.owner = currentOwner;
-      throw new Error('Did not modify workspace');
+      throw new Error('Error: Did not modify workspace');
     }
+
+    return this.owner;
   }
 
-  async updateWorkshopById(id: string, workshop: Workshop): Promise<void> {
+  async updateWorkshopById(
+    id: string,
+    workshop: Workshop
+  ): Promise<Workshop | null> {
     const host = window.location.host;
     const absoluteURL = `${this.env}://${host}/api/workshops/${id}`;
 
@@ -77,12 +84,37 @@ export class WorkshopManagerService implements WorkshopManagerContract {
       (_workshop) => _workshop._id === workshop._id
     );
     this.owner.workshops[index] = workshop;
+
     const fetchData = await getFetcher(absoluteURL, 'PUT', workshop);
 
-    if (fetchData.message === 'Error') throw new Error(fetchData.error);
+    if (fetchData.message === 'Error')
+      throw new Error(`Error: ${fetchData.error}`);
+
+    if (fetchData.data.modifiedCount === 1) {
+      return workshop;
+    }
+
+    return null;
   }
 
-  async deleteWorkshopById(id: string): Promise<void> {}
+  async deleteWorkshopById(id: string): Promise<void> {
+    const host = window.location.host;
+    const absoluteURL = `${this.env}://${host}/api/workshops/${id}`;
+
+    const _workshops = [...this.owner.workshops];
+    const index = _workshops.findIndex((_workshop) => _workshop._id === id);
+    _workshops.splice(index, 1);
+
+    this.owner.workshops = _workshops;
+
+    const fetchData = await getFetcher(absoluteURL, 'DELETE', id);
+
+    if (fetchData.message === 'Error')
+      throw new Error(`Error: ${fetchData.error}`);
+
+    if (fetchData.data.deletedCount === 0)
+      throw new Error(`Error: Workshop not deleted`);
+  }
 }
 
 export function useWorkshopManagerService(owner: Owner) {

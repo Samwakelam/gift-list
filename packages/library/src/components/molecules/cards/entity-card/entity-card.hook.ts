@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { Hook, isList, isWorkshop } from '@sam/types';
 
@@ -50,15 +51,15 @@ export const useEntityCard = (
   };
 
   const resolveLink: EntityCardHandlers['resolveLink'] = () => {
-    // const router = useRouter();
+    const router = useRouter();
 
-    // if (isList(entity)) {
-    //   return `${router.query.userId}/workshop/${router.query.workshopId}/list/${entity._id}`;
-    // }
+    if (isList(entity)) {
+      return `${router.query.userId}/workshop/${router.query.workshopId}/list/${entity._id}`;
+    }
 
-    // if (isWorkshop(entity)) {
-    //   return `/${router.query.userId}/workshop/${entity._id}`;
-    // }
+    if (isWorkshop(entity)) {
+      return `/${router.query.userId}/workshop/${entity._id}`;
+    }
 
     return '/';
   };
